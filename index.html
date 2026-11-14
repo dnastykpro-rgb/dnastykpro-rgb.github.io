@@ -44,21 +44,23 @@
         .lock p{font-size:0.9rem;color:#cbd5e1;margin-bottom:10px}
         .k-row{display:flex;gap:8px;justify-content:center;margin-top:8px}
         input{background:rgba(9,6,18,0.85);border:1px solid rgba(192,132,252,0.35);color:#fff;padding:10px 14px;border-radius:10px;outline:none;font-family:inherit}
-        .modal-bg{position:fixed;inset:0;background:rgba(5,3,12,0.86);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
-        .modal{background:#140e26;border:1px solid rgba(192,132,252,0.4);border-radius:22px;padding:24px;width:100%;max-width:380px;animation:popIn 0.25s ease;max-height:90vh;overflow-y:auto}
-        .owner-page{max-width:560px;border-color:rgba(251,191,36,0.55);box-shadow:0 25px 60px rgba(0,0,0,0.85)}
-        .op-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(251,191,36,0.25)}
-        .op-head h3{color:#fbbf24;font-size:1.2rem}
-        .op-sec{margin-bottom:15px;padding-bottom:13px;border-bottom:1px solid rgba(255,255,255,0.08)}
+        .modal-bg{position:fixed;inset:0;background:rgba(5,3,12,0.86);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}
+        .modal{background:#140e26;border:1px solid rgba(192,132,252,0.4);border-radius:20px;padding:20px;width:100%;max-width:380px;animation:popIn 0.25s ease}
+        .owner-page{max-width:520px;max-height:85vh;overflow-y:auto;border-color:rgba(251,191,36,0.55);box-shadow:0 25px 60px rgba(0,0,0,0.85)}
+        .owner-page::-webkit-scrollbar,.u-list::-webkit-scrollbar{width:6px}
+        .owner-page::-webkit-scrollbar-thumb,.u-list::-webkit-scrollbar-thumb{background:#7e22ce;border-radius:10px}
+        .op-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(251,191,36,0.25)}
+        .op-head h3{color:#fbbf24;font-size:1.15rem}
+        .op-sec{margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.08)}
         .op-sec:last-child{border:none;margin-bottom:0;padding-bottom:0}
-        .op-lbl{font-size:0.84rem;color:#cbd5e1;margin-bottom:8px;display:block;font-weight:600}
-        .stat-box{display:flex;justify-content:space-between;align-items:center;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.35);padding:10px 14px;border-radius:12px;color:#fde68a;font-weight:600}
-        .keys{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-        .k-chip{background:rgba(0,0,0,0.5);border:1px solid rgba(251,191,36,0.45);padding:5px 10px;border-radius:8px;font-family:monospace;color:#fde68a;cursor:pointer;font-size:0.82rem}
-        .op-row{display:flex;gap:8px}.op-row input{flex:1;padding:8px 12px;font-size:0.85rem}
-        .u-list{display:flex;flex-direction:column;gap:8px;max-height:170px;overflow-y:auto}
-        .u-item{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);border:1px solid rgba(192,132,252,0.2);padding:8px 12px;border-radius:10px;font-size:0.85rem;gap:8px;flex-wrap:wrap}
-        .u-acts{display:flex;gap:5px;flex-wrap:wrap}.u-acts button{padding:4px 8px;font-size:0.75rem;border-radius:6px}
+        .op-lbl{font-size:0.82rem;color:#cbd5e1;margin-bottom:6px;display:block;font-weight:600}
+        .stat-box{display:flex;justify-content:space-between;align-items:center;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.35);padding:8px 12px;border-radius:10px;color:#fde68a;font-size:0.88rem;font-weight:600}
+        .keys{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+        .k-chip{background:rgba(0,0,0,0.5);border:1px solid rgba(251,191,36,0.45);padding:4px 9px;border-radius:7px;font-family:monospace;color:#fde68a;cursor:pointer;font-size:0.8rem}
+        .op-row{display:flex;gap:8px}.op-row input{flex:1;padding:7px 11px;font-size:0.84rem}
+        .u-list{display:flex;flex-direction:column;gap:6px;max-height:115px;overflow-y:auto}
+        .u-item{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);border:1px solid rgba(192,132,252,0.2);padding:6px 10px;border-radius:9px;font-size:0.82rem;gap:6px;flex-wrap:wrap}
+        .u-acts{display:flex;gap:4px;flex-wrap:wrap}.u-acts button{padding:3px 7px;font-size:0.72rem;border-radius:6px}
         .tabs{display:flex;gap:8px;margin-bottom:14px}
         .tab{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(192,132,252,0.3);background:transparent;color:#cbd5e1;cursor:pointer;font-weight:600}
         .tab.act{background:#7e22ce;color:#fff}
@@ -92,35 +94,29 @@
         </div>
     </main>
 
-    <!-- Увеличение скриншота по клику -->
     <div class="modal-bg" id="zoomModal" onclick="this.style.display='none'">
         <img id="zoomImg" src="" alt="Preview">
     </div>
 
-    <!-- Админ-Панель -->
     <div class="modal-bg" id="ownerModal" onclick="if(event.target===this) closeOwner()">
         <div class="modal owner-page">
             <div class="op-head"><h3>👑 Админ-Панель</h3><button class="btn-s" onclick="closeOwner()">✕ Закрыть</button></div>
-            
             <div class="op-sec" id="ownerStatSec">
                 <span class="op-lbl">📊 Статистика загрузок:</span>
                 <div class="stat-box">
-                    <span>Всего скачиваний мода: <b id="dlCountText" style="font-size:1.15rem;color:#fff">0</b></span>
-                    <button class="btn-s btn-red" onclick="resetDl()">Сбросить</button>
+                    <span>Всего скачиваний: <b id="dlCountText" style="font-size:1.05rem;color:#fff">0</b></span>
+                    <button class="btn-s btn-red" style="padding:5px 10px;font-size:0.78rem" onclick="resetDl()">Сбросить</button>
                 </div>
             </div>
-
             <div class="op-sec">
                 <span class="op-lbl">👥 Модерация аккаунтов:</span>
                 <div class="u-list" id="userList"></div>
             </div>
-
             <div class="op-sec" id="ownerOnlySec">
-                <span class="op-lbl">🔑 Ключи доступа VIP (нажмите для копирования):</span>
+                <span class="op-lbl">🔑 Ключи доступа VIP (клик — копировать):</span>
                 <div class="keys" id="keyList"></div>
                 <div class="op-row"><input id="newKeyIn" placeholder="Новый ключ (напр. DV-999)"><button class="btn-s btn-owner" onclick="addKey()">Создать</button></div>
             </div>
-
             <div class="op-sec" id="ownerUrlSec">
                 <span class="op-lbl">📦 Имя архива для скачивания (.zip):</span>
                 <div class="op-row"><input id="urlIn" placeholder="DragonVisuals-1.21.4.zip"><button class="btn-s btn-owner" onclick="saveUrl()">Сохранить</button></div>
@@ -128,7 +124,6 @@
         </div>
     </div>
 
-    <!-- Вход / Регистрация -->
     <div class="modal-bg" id="authModal" onclick="if(event.target===this) closeModal()">
         <div class="modal">
             <div class="tabs"><button class="tab act" id="tLog" onclick="setTab('login')">Вход</button><button class="tab" id="tReg" onclick="setTab('reg')">Регистрация</button></div>
@@ -217,7 +212,7 @@
 
         function renderUsers() {
             const db = getDb(), list = document.getElementById('userList'), names = Object.keys(db), cur = JSON.parse(localStorage.getItem('dv_cur'));
-            if (!names.length) { list.innerHTML = '<div style="color:#8b80a8;font-size:0.85rem">Пока нет зарегистрированных игроков.</div>'; return; }
+            if (!names.length) { list.innerHTML = '<div style="color:#8b80a8;font-size:0.82rem">Пока нет зарегистрированных игроков.</div>'; return; }
             list.innerHTML = names.map(u => {
                 const info = db[u], st = info.banned ? '<span class="badge r-ban">БАН</span>' : `<span class="badge r-${info.r.toLowerCase()}">${info.r}</span>`;
                 const mBtn = cur.r === 'Owner' ? `<button class="btn-s" onclick="setUserRank('${u}','Moder')">Moder</button>` : '';
