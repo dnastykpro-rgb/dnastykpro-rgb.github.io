@@ -101,13 +101,16 @@
     <div class="modal-bg" id="ownerModal" onclick="if(event.target===this) closeOwner()">
         <div class="modal owner-page">
             <div class="op-head"><h3>👑 Админ-Панель</h3><button class="btn-s" onclick="closeOwner()">✕ Закрыть</button></div>
-            <div class="op-sec" id="ownerStatSec">
-                <span class="op-lbl">📊 Статистика загрузок:</span>
-                <div class="stat-box">
-                    <span>Всего скачиваний: <b id="dlCountText" style="font-size:1.05rem;color:#fff">0</b></span>
-                    <button class="btn-s btn-red" style="padding:5px 10px;font-size:0.78rem" onclick="resetDl()">Сбросить</button>
-                </div>
-            </div>
+         <div class="op-sec" id="ownerStatSec">
+             <span class="op-lbl">📊 Статистика сайта:</span>
+             <div class="stat-box" style="margin-bottom:6px">
+                 <span>Всего посещений сайта: <b id="visitCountText" style="font-size:1.05rem;color:#a855f7">...</b></span>
+             </div>
+             <div class="stat-box">
+                 <span>Всего скачиваний: <b id="dlCountText" style="font-size:1.05rem;color:#fff">0</b></span>
+                 <button class="btn-s btn-red" style="padding:5px 10px;font-size:0.78rem" onclick="resetDl()">Сбросить</button>
+             </div>
+         </div>
             <div class="op-sec">
                 <span class="op-lbl">👥 Модерация аккаунтов:</span>
                 <div class="u-list" id="userList"></div>
