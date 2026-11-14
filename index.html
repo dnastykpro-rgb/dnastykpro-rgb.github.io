@@ -334,7 +334,7 @@
             } else {
                 addArea.innerHTML = `
                     <div class="lock" style="margin-bottom:18px">
-                        <p>🔒 Добавлять свои конфиги могут только игроки с рангом <b>VIP</b> и выше. Скачивание доступно всем!</p>
+                        <p>🔒 Добавлять свои конфиги могут только игроки с рангом <b>VIP</b> и выше. Выбрать и установить любой конфиг можно в <b>DragonLauncher</b> или в меню мода!</p>
                         ${!cur ? `<button class="btn-s" onclick="openModal('login')">Войти в аккаунт</button>` : `<button class="btn-s" onclick="switchPage('main')">Активировать VIP ключ</button>`}
                     </div>
                 `;
@@ -349,27 +349,24 @@
             const isStaff = cur && (cur.r === 'Owner' || cur.r === 'Moder');
             listEl.innerHTML = configs.map(c => {
                 const rCls = c.rank === 'Owner' ? 'r-owner' : (c.rank === 'Moder' ? 'r-moder' : 'r-vip');
-                const delBtn = (isStaff || (cur && cur.u === c.author)) ? `<button class="btn-s btn-red" onclick="deleteCfg(${c.id})">🗑 Удалить</button>` : '';
+                const delBtn = (isStaff || (cur && cur.u === c.author)) ? `<button class="btn-s btn-red" style="padding:4px 9px;font-size:0.75rem" onclick="deleteCfg(${c.id})">✕</button>` : '';
                 return `
                     <div class="cfg-item">
                         <div class="cfg-top">
                             <span class="cfg-title">${escHtml(c.name)}</span>
-                            <span class="tag">${escHtml(c.fileName || 'config.json')}</span>
+                            ${delBtn}
                         </div>
                         <div class="cfg-meta">
                             <span>Автор: <b>${escHtml(c.author)}</b></span>
                             <span class="badge ${rCls}">${escHtml(c.rank || 'VIP')}</span>
                             <span>• ${escHtml(c.date || '')}</span>
                         </div>
-                        <p class="cfg-desc">${escHtml(c.desc)}</p>
-                        <div class="cfg-btns">
-                            <button class="btn-s" style="background:rgba(147,51,234,0.4);border-color:#c084fc" onclick="downloadCfg(${c.id})">⬇ Скачать конфиг</button>
-                            ${delBtn}
-                        </div>
+                        <p class="cfg-desc" style="margin-bottom:0">${escHtml(c.desc)}</p>
                     </div>
                 `;
             }).join('');
         }
+
         function setShot(idx, btn) {
             document.getElementById('shotImg').src = SHOTS[idx];
             document.querySelectorAll('.g-tab').forEach(b => b.classList.remove('act'));
