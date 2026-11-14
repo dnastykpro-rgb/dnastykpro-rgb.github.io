@@ -175,7 +175,7 @@
 
         const openModal = m => { setTab(m); document.getElementById('authModal').style.display = 'flex'; };
         const closeModal = () => document.getElementById('authModal').style.display = 'none';
-        const openOwner = () => { renderUsers(); document.getElementById('dlCountText').innerText = getDl(); document.getElementById('ownerModal').style.display = 'flex'; };
+        const openOwner = () => { renderUsers(); document.getElementById('dlCountText').innerText = getDl(); document.getElementById('visitCountText').innerText = localStorage.getItem('dv_visits') || '1'; document.getElementById('ownerModal').style.display = 'flex'; };
         const closeOwner = () => document.getElementById('ownerModal').style.display = 'none';
         const setTab = m => { mode = m; document.getElementById('tLog').classList.toggle('act', m==='login'); document.getElementById('tReg').classList.toggle('act', m==='reg'); };
 
@@ -263,7 +263,19 @@
                 document.getElementById('keyList').innerHTML = getKeys().map(k => `<span class="k-chip" onclick="navigator.clipboard.writeText('${k}');alert('Скопировано: ${k}')">${k}</span>`).join('');
             }
         }
-        render();
+        fetch('https://' + 'api.counterapi.dev' + '/v1/dragonvisuals_mc1214/visits/up')
+    .then(r => r.json())
+    .then(d => {
+        localStorage.setItem('dv_visits', d.count);
+        const el = document.getElementById('visitCountText');
+        if (el) el.innerText = d.count;
+    })
+    .catch(() => {
+        const el = document.getElementById('visitCountText');
+        if (el) el.innerText = localStorage.getItem('dv_visits') || '1';
+    });
+
+render();
     </script>
 </body>
 </html>
