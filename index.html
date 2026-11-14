@@ -263,17 +263,20 @@
                 document.getElementById('keyList').innerHTML = getKeys().map(k => `<span class="k-chip" onclick="navigator.clipboard.writeText('${k}');alert('Скопировано: ${k}')">${k}</span>`).join('');
             }
         }
-        fetch('https://' + 'api.counterapi.dev' + '/v1/dragonvisuals_mc1214/visits/up')
-    .then(r => r.json())
-    .then(d => {
-        localStorage.setItem('dv_visits', d.count);
-        const el = document.getElementById('visitCountText');
-        if (el) el.innerText = d.count;
-    })
-    .catch(() => {
-        const el = document.getElementById('visitCountText');
-        if (el) el.innerText = localStorage.getItem('dv_visits') || '1';
-    });
+               fetch('https://' + 'api.counterapi.dev' + '/v1/dragonvisuals_mc1214/visits/up')
+            .then(r => r.json())
+            .then(d => {
+                const num = d.count || d.value || (parseInt(localStorage.getItem('dv_visits') || '0') + 1);
+                localStorage.setItem('dv_visits', num);
+                const el = document.getElementById('visitCountText');
+                if (el) el.innerText = num;
+            })
+            .catch(() => {
+                const num = parseInt(localStorage.getItem('dv_visits') || '0') + 1;
+                localStorage.setItem('dv_visits', num);
+                const el = document.getElementById('visitCountText');
+                if (el) el.innerText = num;
+            });
 
 render();
     </script>
