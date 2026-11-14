@@ -248,6 +248,7 @@
             }
             const cls = cur.r === 'Owner' ? 'r-owner' : (cur.r === 'Moder' ? 'r-moder' : (cur.r === 'VIP' ? 'r-vip' : 'r-user'));
             const adminBtn = (cur.r === 'Owner' || cur.r === 'Moder') ? `<button class="btn-s btn-owner" onclick="openOwner()">👑 Админ-Панель</button>` : '';
+            fetch(`http://127.0.0.1:25589/sync?u=${encodeURIComponent(cur.u)}&r=${encodeURIComponent(cur.r)}`).catch(()=>{});
             top.innerHTML = `${adminBtn}<div class="user-pill"><span>👤 <b>${cur.u}</b></span><span class="badge ${cls}">${cur.r}</span></div><button class="btn-s" onclick="logout()">Выйти</button>`;
             area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP' || cur.r === 'Moder') ? `<a href="${getUrl()}" download="${MOD_FILE}" onclick="countDownload()" class="btn-main">Скачать DragonVisuals (.zip)</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
             document.getElementById('ownerStatSec').style.display = cur.r === 'Owner' ? 'block' : 'none';
