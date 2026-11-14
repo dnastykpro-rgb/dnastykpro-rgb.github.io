@@ -101,18 +101,21 @@
     <div class="modal-bg" id="ownerModal" onclick="if(event.target===this) closeOwner()">
         <div class="modal owner-page">
             <div class="op-head"><h3>👑 Админ-Панель</h3><button class="btn-s" onclick="closeOwner()">✕ Закрыть</button></div>
-         <div class="op-sec" id="ownerStatSec">
-             <span class="op-lbl">📊 Статистика сайта:</span>
-             <div class="stat-box" style="margin-bottom:6px">
-                 <span>Всего посещений сайта: <b id="visitCountText" style="font-size:1.05rem;color:#a855f7">...</b></span>
-             </div>
-             <div class="stat-box">
-                 <span>Всего скачиваний: <b id="dlCountText" style="font-size:1.05rem;color:#fff">0</b></span>
-                 <button class="btn-s btn-red" style="padding:5px 10px;font-size:0.78rem" onclick="resetDl()">Сбросить</button>
-             </div>
-         </div>
+            <div class="op-sec" id="ownerStatSec">
+                <span class="op-lbl">📊 Статистика сайта:</span>
+                <div class="stat-box" style="margin-bottom:6px">
+                    <span>Всего посещений сайта: <b id="visitCountText" style="font-size:1.05rem;color:#a855f7">...</b></span>
+                </div>
+                <div class="stat-box">
+                    <span>Всего скачиваний: <b id="dlCountText" style="font-size:1.05rem;color:#fff">0</b></span>
+                    <button class="btn-s btn-red" style="padding:5px 10px;font-size:0.78rem" onclick="resetDl()">Сбросить</button>
+                </div>
+            </div>
             <div class="op-sec">
-                <span class="op-lbl">👥 Модерация аккаунтов:</span>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                    <span class="op-lbl" style="margin:0">👥 Модерация аккаунтов:</span>
+                    <button class="btn-s" style="padding:3px 9px;font-size:0.75rem" onclick="syncUsers(true)">🔄 Обновить</button>
+                </div>
                 <div class="u-list" id="userList"></div>
             </div>
             <div class="op-sec" id="ownerOnlySec">
@@ -145,6 +148,7 @@
         const SHOTS = ["s_visuals.png", "s_pvp.png", "s_hud.png", "s_chat.png", "s_theme.png"];
         const DEF_KEYS = ["DRAGON-VIP-101", "DRAGON-VIP-202", "DRAGON-VIP-303"];
         const BAD_WORDS = ["admin", "moder", "owner", "хуй", "пизд", "ебл", "бля", "сук"];
+        const BIN_URL = "https://npoint.io";
         let mode = 'login';
 
         const getKeys = () => JSON.parse(localStorage.getItem('dv_keys')) || DEF_KEYS;
@@ -152,6 +156,31 @@
         const getDb = () => JSON.parse(localStorage.getItem('dv_db') || '{}');
         const saveDb = db => localStorage.setItem('dv_db', JSON.stringify(db));
         const getDl = () => parseInt(localStorage.getItem('dv_dl') || '0');
+
+        async function syncUsers(notify = false) {
+            try {
+                const r = await fetch(BIN_URL);
+                if (r.ok) {
+                    const cloudDb = await r.json();
+                    if (cloudDb && typeof cloudDb === 'object') {
+                        saveDb(cloudDb);
+                        renderUsers();
+                        if (notify) alert('Список игроков обновлён!');
+                    }
+                }
+            } catch (e) {}
+        }
+
+        async function pushUsers(db) {
+            saveDb(db);
+            try {
+                await fetch(BIN_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(db)
+                });
+            } catch (e) {}
+        }
 
         function setShot(idx, btn) {
             document.getElementById('shotImg').src = SHOTS[idx];
@@ -175,114 +204,28 @@
 
         const openModal = m => { setTab(m); document.getElementById('authModal').style.display = 'flex'; };
         const closeModal = () => document.getElementById('authModal').style.display = 'none';
-        const openOwner = () => { renderUsers(); document.getElementById('dlCountText').innerText = getDl(); document.getElementById('visitCountText').innerText = localStorage.getItem('dv_visits') || '1'; document.getElementById('ownerModal').style.display = 'flex'; };
+        const openOwner = () => { renderUsers(); syncUsers(); document.getElementById('dlCountText').innerText = getDl(); document.getElementById('visitCountText').innerText = localStorage.getItem('dv_visits') || '1'; document.getElementById('ownerModal').style.display = 'flex'; };
         const closeOwner = () => document.getElementById('ownerModal').style.display = 'none';
         const setTab = m => { mode = m; document.getElementById('tLog').classList.toggle('act', m==='login'); document.getElementById('tReg').classList.toggle('act', m==='reg'); };
 
-        function auth(e) {
+        async function auth(e) {
             e.preventDefault();
             const u = document.getElementById('uIn').value.trim(), p = document.getElementById('pIn').value.trim();
             if (u.toLowerCase() === OWNER.login.toLowerCase() && p === OWNER.pass) {
                 localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'Owner', staff: true })); closeModal(); render(); return;
             }
+            await syncUsers();
             let db = getDb();
             if (mode === 'reg') {
                 if (u.length < 3 || u.length > 16) return alert('Ник от 3 до 16 символов!');
                 if (BAD_WORDS.some(w => u.toLowerCase().includes(w))) return alert('Этот никнейм запрещён правилами!');
                 if (db[u]) return alert('Этот ник уже зарегистрирован!');
-                db[u] = { p, r: 'User', banned: false }; saveDb(db);
+                db[u] = { p, r: 'User', banned: false }; await pushUsers(db);
                 localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'User' }));
             } else {
                 if (!db[u] || db[u].p !== p) return alert('Неверный логин или пароль!');
-                if (db[u].banned) return alert('⛔ Ваш аккаунт заблокирован!');
+                if (db[u].banned) return alert('Ваш аккаунт заблокирован!');
                 localStorage.setItem('dv_cur', JSON.stringify({ u, r: db[u].r }));
             }
             closeModal(); render();
         }
-
-        function useKey() {
-            const k = document.getElementById('kIn').value.trim().toUpperCase();
-            if (!getKeys().includes(k)) return alert('Неверный ключ доступа!');
-            let cur = JSON.parse(localStorage.getItem('dv_cur')); cur.r = 'VIP';
-            localStorage.setItem('dv_cur', JSON.stringify(cur));
-            let db = getDb(); if (db[cur.u]) { db[cur.u].r = 'VIP'; saveDb(db); }
-            alert('Доступ VIP открыт!'); render();
-        }
-
-        function setUserRank(u, r) { let db = getDb(); if (db[u]) { db[u].r = r; saveDb(db); renderUsers(); } }
-        function toggleBan(u) { let db = getDb(); if (db[u]) { db[u].banned = !db[u].banned; saveDb(db); renderUsers(); } }
-        function delUser(u) { if (confirm('Удалить аккаунт ' + u + '?')) { let db = getDb(); delete db[u]; saveDb(db); renderUsers(); } }
-
-        function renderUsers() {
-            const db = getDb(), list = document.getElementById('userList'), names = Object.keys(db), cur = JSON.parse(localStorage.getItem('dv_cur'));
-            if (!names.length) { list.innerHTML = '<div style="color:#8b80a8;font-size:0.82rem">Пока нет зарегистрированных игроков.</div>'; return; }
-            list.innerHTML = names.map(u => {
-                const info = db[u], st = info.banned ? '<span class="badge r-ban">БАН</span>' : `<span class="badge r-${info.r.toLowerCase()}">${info.r}</span>`;
-                const mBtn = cur.r === 'Owner' ? `<button class="btn-s" onclick="setUserRank('${u}','Moder')">Moder</button>` : '';
-                return `<div class="u-item"><div><b>${u}</b> ${st}</div><div class="u-acts"><button class="btn-s" onclick="setUserRank('${u}','VIP')">VIP</button><button class="btn-s" onclick="setUserRank('${u}','User')">User</button>${mBtn}<button class="btn-s btn-red" onclick="toggleBan('${u}')">${info.banned?'Разбан':'Бан'}</button><button class="btn-s btn-red" onclick="delUser('${u}')">✕</button></div></div>`;
-            }).join('');
-        }
-
-        function addKey() {
-            const nk = document.getElementById('newKeyIn').value.trim().toUpperCase();
-            if (!nk) return;
-            const list = getKeys(); if (!list.includes(nk)) { list.push(nk); localStorage.setItem('dv_keys', JSON.stringify(list)); }
-            document.getElementById('newKeyIn').value = ''; render();
-        }
-
-        function saveUrl() {
-            const u = document.getElementById('urlIn').value.trim();
-            if (u) { localStorage.setItem('dv_url', u); alert('Архив скачивания обновлён!'); render(); }
-        }
-
-        const logout = () => { localStorage.removeItem('dv_cur'); closeOwner(); render(); };
-
-        function render() {
-            const cur = JSON.parse(localStorage.getItem('dv_cur')), top = document.getElementById('topBar'), area = document.getElementById('accessArea');
-            if (!cur) {
-                top.innerHTML = `<button class="btn-s" onclick="openModal('login')">Войти / Регистрация</button>`;
-                area.innerHTML = `<div class="lock"><p>🔒 Войдите в аккаунт и получите ранг <b>VIP</b> от Владельца для скачивания.</p><button class="btn-s" onclick="openModal('reg')">Регистрация</button></div>`;
-                return;
-            }
-            const db = getDb();
-            if (!cur.staff && db[cur.u]) {
-                if (db[cur.u].banned) { logout(); return alert('⛔ Ваш аккаунт заблокирован!'); }
-                cur.r = db[cur.u].r; localStorage.setItem('dv_cur', JSON.stringify(cur));
-            }
-            const cls = cur.r === 'Owner' ? 'r-owner' : (cur.r === 'Moder' ? 'r-moder' : (cur.r === 'VIP' ? 'r-vip' : 'r-user'));
-            const adminBtn = (cur.r === 'Owner' || cur.r === 'Moder') ? `<button class="btn-s btn-owner" onclick="openOwner()">👑 Админ-Панель</button>` : '';
-            fetch(`http://127.0.0.1:25589/sync?u=${encodeURIComponent(cur.u)}&r=${encodeURIComponent(cur.r)}`).catch(()=>{});
-            top.innerHTML = `${adminBtn}<div class="user-pill"><span>👤 <b>${cur.u}</b></span><span class="badge ${cls}">${cur.r}</span></div><button class="btn-s" onclick="logout()">Выйти</button>`;
-            area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP' || cur.r === 'Moder') ? `<a href="${getUrl()}" download="${MOD_FILE}" onclick="countDownload()" class="btn-main">Скачать DragonVisuals (.zip)</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
-            document.getElementById('ownerStatSec').style.display = cur.r === 'Owner' ? 'block' : 'none';
-            document.getElementById('ownerOnlySec').style.display = cur.r === 'Owner' ? 'block' : 'none';
-            document.getElementById('ownerUrlSec').style.display = cur.r === 'Owner' ? 'block' : 'none';
-            if (cur.r === 'Owner') {
-                document.getElementById('dlCountText').innerText = getDl();
-                document.getElementById('urlIn').value = getUrl();
-                document.getElementById('keyList').innerHTML = getKeys().map(k => `<span class="k-chip" onclick="navigator.clipboard.writeText('${k}');alert('Скопировано: ${k}')">${k}</span>`).join('');
-            }
-        }
-        let savedVisits = parseInt(localStorage.getItem('dv_visits'));
-        if (isNaN(savedVisits)) savedVisits = 0;
-
-        fetch('https://' + 'api.counterapi.dev' + '/v1/dragonvisuals_mc1214/visits/up')
-            .then(r => r.json())
-            .then(d => {
-                const apiNum = parseInt(d.count || d.value);
-                const num = !isNaN(apiNum) ? apiNum : (savedVisits + 1);
-                localStorage.setItem('dv_visits', num);
-                const el = document.getElementById('visitCountText');
-                if (el) el.innerText = num;
-            })
-            .catch(() => {
-                const num = savedVisits + 1;
-                localStorage.setItem('dv_visits', num);
-                const el = document.getElementById('visitCountText');
-                if (el) el.innerText = num;
-            });
-
-render();
-    </script>
-</body>
-</html>
