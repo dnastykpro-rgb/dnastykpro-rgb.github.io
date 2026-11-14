@@ -22,43 +22,48 @@
         .btn-owner:hover{background:rgba(245,158,11,0.45)}
         .btn-red{background:rgba(220,38,38,0.25);border-color:rgba(248,113,113,0.5);color:#fecaca}
         .btn-red:hover{background:rgba(220,38,38,0.5)}
-        header{text-align:center;padding:25px 20px 15px;animation:fadeUp 0.9s ease forwards}
-        .ver{display:inline-block;padding:5px 16px;margin-bottom:12px;border-radius:99px;background:rgba(168,85,247,0.15);border:1px solid rgba(192,132,252,0.4);color:#e9d5ff;font-size:0.85rem;font-weight:600}
-        .logo{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,7vw,4.6rem);background:linear-gradient(135deg,#f5d0fe,#c084fc,#7e22ce);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 25px rgba(192,132,252,0.45));animation:float 5s ease-in-out infinite;margin-bottom:8px}
-        .sub{color:#cbd5e1;font-size:1.05rem}
-        .wrap{width:100%;max-width:620px;padding:20px;animation:fadeUp 0.9s ease 0.2s forwards;opacity:0}
-        .card{background:rgba(20,14,38,0.65);border:1px solid rgba(192,132,252,0.3);border-radius:24px;padding:24px;backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,0.45);transition:0.35s}
-        .card:hover{transform:translateY(-5px);border-color:rgba(216,180,254,0.65)}
-        .preview{width:100%;height:200px;border-radius:14px;background:linear-gradient(135deg,rgba(46,16,101,0.7),rgba(15,23,42,0.9));display:flex;align-items:center;justify-content:center;color:#a78bfa;margin-bottom:18px;overflow:hidden;border:1px solid rgba(167,139,250,0.2)}
+        header{text-align:center;padding:20px 20px 10px;animation:fadeUp 0.9s ease forwards}
+        .ver{display:inline-block;padding:5px 16px;margin-bottom:10px;border-radius:99px;background:rgba(168,85,247,0.15);border:1px solid rgba(192,132,252,0.4);color:#e9d5ff;font-size:0.85rem;font-weight:600}
+        .logo{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,7vw,4.5rem);background:linear-gradient(135deg,#f5d0fe,#c084fc,#7e22ce);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 25px rgba(192,132,252,0.45));animation:float 5s ease-in-out infinite;margin-bottom:6px}
+        .sub{color:#cbd5e1;font-size:1.02rem}
+        .wrap{width:100%;max-width:650px;padding:18px;animation:fadeUp 0.9s ease 0.2s forwards;opacity:0}
+        .card{background:rgba(20,14,38,0.68);border:1px solid rgba(192,132,252,0.3);border-radius:24px;padding:22px;backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,0.45)}
+        .gal-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+        .g-tab{flex:1;padding:7px 10px;border-radius:9px;border:1px solid rgba(192,132,252,0.28);background:rgba(15,10,30,0.6);color:#cbd5e1;cursor:pointer;font-weight:600;font-size:0.8rem;transition:0.2s}
+        .g-tab.act,.g-tab:hover{background:#7e22ce;color:#fff;border-color:#c084fc}
+        .preview{width:100%;height:260px;border-radius:14px;background:#0f0a1e;display:flex;align-items:center;justify-content:center;color:#a78bfa;margin-bottom:18px;overflow:hidden;border:1px solid rgba(167,139,250,0.25);cursor:zoom-in;position:relative}
+        .preview img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease}
+        .preview:hover img{transform:scale(1.03)}
         .c-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
         .c-head h2{font-size:1.6rem;font-weight:800}
         .tag{font-size:0.8rem;font-weight:600;padding:5px 12px;border-radius:8px;background:rgba(168,85,247,0.2);border:1px solid rgba(192,132,252,0.35);color:#e9d5ff}
-        .desc{color:#cbd5e1;font-size:0.95rem;line-height:1.6;margin-bottom:20px}
+        .desc{color:#cbd5e1;font-size:0.93rem;line-height:1.6;margin-bottom:20px}
         .btn-main{display:inline-block;padding:14px 34px;background:linear-gradient(90deg,#9333ea,#6b21a8);color:#fff;text-decoration:none;font-weight:800;border-radius:12px;border:1px solid rgba(216,180,254,0.45);box-shadow:0 8px 25px rgba(147,51,234,0.45);cursor:pointer;transition:0.3s}
         .btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(168,85,247,0.7)}
         .lock{background:rgba(15,23,42,0.75);border:1px dashed rgba(192,132,252,0.4);padding:16px;border-radius:14px;text-align:center}
         .lock p{font-size:0.9rem;color:#cbd5e1;margin-bottom:10px}
         .k-row{display:flex;gap:8px;justify-content:center;margin-top:8px}
         input{background:rgba(9,6,18,0.85);border:1px solid rgba(192,132,252,0.35);color:#fff;padding:10px 14px;border-radius:10px;outline:none;font-family:inherit}
-        .modal-bg{position:fixed;inset:0;background:rgba(5,3,12,0.84);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
+        .modal-bg{position:fixed;inset:0;background:rgba(5,3,12,0.86);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
         .modal{background:#140e26;border:1px solid rgba(192,132,252,0.4);border-radius:22px;padding:24px;width:100%;max-width:380px;animation:popIn 0.25s ease;max-height:90vh;overflow-y:auto}
         .owner-page{max-width:560px;border-color:rgba(251,191,36,0.55);box-shadow:0 25px 60px rgba(0,0,0,0.85)}
         .op-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(251,191,36,0.25)}
         .op-head h3{color:#fbbf24;font-size:1.2rem}
-        .op-sec{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08)}
+        .op-sec{margin-bottom:15px;padding-bottom:13px;border-bottom:1px solid rgba(255,255,255,0.08)}
         .op-sec:last-child{border:none;margin-bottom:0;padding-bottom:0}
         .op-lbl{font-size:0.84rem;color:#cbd5e1;margin-bottom:8px;display:block;font-weight:600}
+        .stat-box{display:flex;justify-content:space-between;align-items:center;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.35);padding:10px 14px;border-radius:12px;color:#fde68a;font-weight:600}
         .keys{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
         .k-chip{background:rgba(0,0,0,0.5);border:1px solid rgba(251,191,36,0.45);padding:5px 10px;border-radius:8px;font-family:monospace;color:#fde68a;cursor:pointer;font-size:0.82rem}
         .op-row{display:flex;gap:8px}.op-row input{flex:1;padding:8px 12px;font-size:0.85rem}
-        .u-list{display:flex;flex-direction:column;gap:8px;max-height:210px;overflow-y:auto}
+        .u-list{display:flex;flex-direction:column;gap:8px;max-height:170px;overflow-y:auto}
         .u-item{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);border:1px solid rgba(192,132,252,0.2);padding:8px 12px;border-radius:10px;font-size:0.85rem;gap:8px;flex-wrap:wrap}
-        .u-acts{display:flex;gap:5px;flex-wrap:wrap}
-        .u-acts button{padding:4px 8px;font-size:0.75rem;border-radius:6px}
+        .u-acts{display:flex;gap:5px;flex-wrap:wrap}.u-acts button{padding:4px 8px;font-size:0.75rem;border-radius:6px}
         .tabs{display:flex;gap:8px;margin-bottom:14px}
         .tab{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(192,132,252,0.3);background:transparent;color:#cbd5e1;cursor:pointer;font-weight:600}
         .tab.act{background:#7e22ce;color:#fff}
         .modal form{display:flex;flex-direction:column;gap:10px}
+        #zoomImg{max-width:92vw;max-height:88vh;border-radius:16px;border:2px solid #a855f7}
         footer{margin-top:auto;padding:20px;font-size:0.85rem;color:#8b80a8}
     </style>
 </head>
@@ -71,32 +76,59 @@
     </header>
     <main class="wrap">
         <div class="card">
-            <div class="preview">Место для скриншота DragonVisuals (1.21.4)</div>
+            <div class="gal-tabs">
+                <button class="g-tab act" onclick="setShot(0, this)">Visuals</button>
+                <button class="g-tab" onclick="setShot(1, this)">PvP</button>
+                <button class="g-tab" onclick="setShot(2, this)">HUD</button>
+                <button class="g-tab" onclick="setShot(3, this)">Chat</button>
+                <button class="g-tab" onclick="setShot(4, this)">Theme</button>
+            </div>
+            <div class="preview" onclick="zoomShot()">
+                <img id="shotImg" src="s_visuals.png" alt="Скриншот DragonVisuals">
+            </div>
             <div class="c-head"><h2>DragonVisuals</h2><span class="tag">Fabric 1.21.4</span></div>
-            <p class="desc">Авторский мод DragonVisuals с плавными анимациями ClickGui, JumpCircles, красивым шрифтом и высокой оптимизацией без потери FPS.</p>
+            <p class="desc">Мод DragonVisuals с плавным ClickGui: TargetESP, JumpCircles, Trails, ChinaHat, 3D Katana, TargetHUD, PurpleGlow и гибкой настройкой тем.</p>
             <div id="accessArea"></div>
         </div>
     </main>
 
+    <!-- Увеличение скриншота по клику -->
+    <div class="modal-bg" id="zoomModal" onclick="this.style.display='none'">
+        <img id="zoomImg" src="" alt="Preview">
+    </div>
+
+    <!-- Админ-Панель -->
     <div class="modal-bg" id="ownerModal" onclick="if(event.target===this) closeOwner()">
         <div class="modal owner-page">
-            <div class="op-head"><h3>👑 Админ-Панель и Модерация</h3><button class="btn-s" onclick="closeOwner()">✕ Закрыть</button></div>
-            <div class="op-sec">
-                <span class="op-lbl">1. Онлайн-список игроков (управление рангами и банами):</span>
-                <div class="u-list" id="userList">Загрузка игроков...</div>
+            <div class="op-head"><h3>👑 Админ-Панель</h3><button class="btn-s" onclick="closeOwner()">✕ Закрыть</button></div>
+            
+            <div class="op-sec" id="ownerStatSec">
+                <span class="op-lbl">📊 Статистика загрузок:</span>
+                <div class="stat-box">
+                    <span>Всего скачиваний мода: <b id="dlCountText" style="font-size:1.15rem;color:#fff">0</b></span>
+                    <button class="btn-s btn-red" onclick="resetDl()">Сбросить</button>
+                </div>
             </div>
+
+            <div class="op-sec">
+                <span class="op-lbl">👥 Модерация аккаунтов:</span>
+                <div class="u-list" id="userList"></div>
+            </div>
+
             <div class="op-sec" id="ownerOnlySec">
-                <span class="op-lbl">2. Ключи доступа VIP (нажмите для копирования):</span>
+                <span class="op-lbl">🔑 Ключи доступа VIP (нажмите для копирования):</span>
                 <div class="keys" id="keyList"></div>
                 <div class="op-row"><input id="newKeyIn" placeholder="Новый ключ (напр. DV-999)"><button class="btn-s btn-owner" onclick="addKey()">Создать</button></div>
             </div>
+
             <div class="op-sec" id="ownerUrlSec">
-                <span class="op-lbl">3. Имя файла или ссылка на скачивание:</span>
-                <div class="op-row"><input id="urlIn" placeholder="dragonvisuals-1.0.0.jar"><button class="btn-s btn-owner" onclick="saveUrl()">Сохранить</button></div>
+                <span class="op-lbl">📦 Имя архива для скачивания (.zip):</span>
+                <div class="op-row"><input id="urlIn" placeholder="DragonVisuals-1.21.4.zip"><button class="btn-s btn-owner" onclick="saveUrl()">Сохранить</button></div>
             </div>
         </div>
     </div>
 
+    <!-- Вход / Регистрация -->
     <div class="modal-bg" id="authModal" onclick="if(event.target===this) closeModal()">
         <div class="modal">
             <div class="tabs"><button class="tab act" id="tLog" onclick="setTab('login')">Вход</button><button class="tab" id="tReg" onclick="setTab('reg')">Регистрация</button></div>
@@ -111,7 +143,8 @@
     <footer>© 2026 DragonVisuals • Fabric 1.21.4</footer>
     <script>
         const OWNER = { login: "admin", pass: "dragon2026" };
-        const MOD_FILE = "dragonvisuals-1.0.0.jar";
+        const MOD_FILE = "DragonVisuals-1.21.4.zip";
+        const SHOTS = ["s_visuals.png", "s_pvp.png", "s_hud.png", "s_chat.png", "s_theme.png"];
         const DEF_KEYS = ["DRAGON-VIP-101", "DRAGON-VIP-202", "DRAGON-VIP-303"];
         const BAD_WORDS = ["admin", "moder", "owner", "хуй", "пизд", "ебл", "бля", "сук"];
         let mode = 'login';
@@ -120,10 +153,31 @@
         const getUrl = () => localStorage.getItem('dv_url') || MOD_FILE;
         const getDb = () => JSON.parse(localStorage.getItem('dv_db') || '{}');
         const saveDb = db => localStorage.setItem('dv_db', JSON.stringify(db));
+        const getDl = () => parseInt(localStorage.getItem('dv_dl') || '0');
+
+        function setShot(idx, btn) {
+            document.getElementById('shotImg').src = SHOTS[idx];
+            document.querySelectorAll('.g-tab').forEach(b => b.classList.remove('act'));
+            btn.classList.add('act');
+        }
+
+        function zoomShot() {
+            document.getElementById('zoomImg').src = document.getElementById('shotImg').src;
+            document.getElementById('zoomModal').style.display = 'flex';
+        }
+
+        function countDownload() {
+            localStorage.setItem('dv_dl', getDl() + 1);
+            if (document.getElementById('dlCountText')) document.getElementById('dlCountText').innerText = getDl();
+        }
+
+        function resetDl() {
+            if (confirm('Обнулить счётчик скачиваний?')) { localStorage.setItem('dv_dl', '0'); render(); }
+        }
 
         const openModal = m => { setTab(m); document.getElementById('authModal').style.display = 'flex'; };
         const closeModal = () => document.getElementById('authModal').style.display = 'none';
-        const openOwner = () => { renderUsers(); document.getElementById('ownerModal').style.display = 'flex'; };
+        const openOwner = () => { renderUsers(); document.getElementById('dlCountText').innerText = getDl(); document.getElementById('ownerModal').style.display = 'flex'; };
         const closeOwner = () => document.getElementById('ownerModal').style.display = 'none';
         const setTab = m => { mode = m; document.getElementById('tLog').classList.toggle('act', m==='login'); document.getElementById('tReg').classList.toggle('act', m==='reg'); };
 
@@ -180,7 +234,7 @@
 
         function saveUrl() {
             const u = document.getElementById('urlIn').value.trim();
-            if (u) { localStorage.setItem('dv_url', u); alert('Файл скачивания обновлён!'); render(); }
+            if (u) { localStorage.setItem('dv_url', u); alert('Архив скачивания обновлён!'); render(); }
         }
 
         const logout = () => { localStorage.removeItem('dv_cur'); closeOwner(); render(); };
@@ -200,10 +254,12 @@
             const cls = cur.r === 'Owner' ? 'r-owner' : (cur.r === 'Moder' ? 'r-moder' : (cur.r === 'VIP' ? 'r-vip' : 'r-user'));
             const adminBtn = (cur.r === 'Owner' || cur.r === 'Moder') ? `<button class="btn-s btn-owner" onclick="openOwner()">👑 Админ-Панель</button>` : '';
             top.innerHTML = `${adminBtn}<div class="user-pill"><span>👤 <b>${cur.u}</b></span><span class="badge ${cls}">${cur.r}</span></div><button class="btn-s" onclick="logout()">Выйти</button>`;
-            area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP' || cur.r === 'Moder') ? `<a href="${getUrl()}" download="${MOD_FILE}" class="btn-main">Скачать DragonVisuals (.jar)</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
+            area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP' || cur.r === 'Moder') ? `<a href="${getUrl()}" download="${MOD_FILE}" onclick="countDownload()" class="btn-main">Скачать DragonVisuals (.zip)</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
+            document.getElementById('ownerStatSec').style.display = cur.r === 'Owner' ? 'block' : 'none';
             document.getElementById('ownerOnlySec').style.display = cur.r === 'Owner' ? 'block' : 'none';
             document.getElementById('ownerUrlSec').style.display = cur.r === 'Owner' ? 'block' : 'none';
             if (cur.r === 'Owner') {
+                document.getElementById('dlCountText').innerText = getDl();
                 document.getElementById('urlIn').value = getUrl();
                 document.getElementById('keyList').innerHTML = getKeys().map(k => `<span class="k-chip" onclick="navigator.clipboard.writeText('${k}');alert('Скопировано: ${k}')">${k}</span>`).join('');
             }
