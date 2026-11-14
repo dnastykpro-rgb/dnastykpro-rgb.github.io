@@ -61,15 +61,15 @@
 <body>
     <div class="top-bar" id="topBar"></div>
     <header>
-        <div class="ver">✦ Minecraft 1.21.4 ✦</div>
+        <div class="ver">✦ Minecraft 1.21.4 • Fabric ✦</div>
         <h1 class="logo">DragonVisuals</h1>
         <p class="sub">Стильный и плавный интерфейс нового поколения для вашей игры.</p>
     </header>
     <main class="wrap">
         <div class="card">
             <div class="preview">Место для скриншота DragonVisuals (1.21.4)</div>
-            <div class="c-head"><h2>DragonVisuals</h2><span class="tag">Версия 1.21.4</span></div>
-            <p class="desc">Авторские визуалы DragonVisuals с плавными анимациями открытия, продуманной навигацией по модулям и высокой оптимизацией без потери FPS.</p>
+            <div class="c-head"><h2>DragonVisuals</h2><span class="tag">Fabric 1.21.4</span></div>
+            <p class="desc">Авторский мод DragonVisuals с плавными анимациями ClickGui, JumpCircles, красивым шрифтом и высокой оптимизацией без потери FPS.</p>
             <div id="accessArea"></div>
         </div>
     </main>
@@ -83,8 +83,8 @@
                 <div class="op-row"><input id="newKeyIn" placeholder="Новый ключ (напр. DV-999)"><button class="btn-s btn-owner" onclick="addKey()">Создать</button></div>
             </div>
             <div class="op-sec">
-                <span class="op-lbl">2. Прямая ссылка на скачивание файла:</span>
-                <div class="op-row"><input id="urlIn" placeholder="https://..."><button class="btn-s btn-owner" onclick="saveUrl()">Сохранить</button></div>
+                <span class="op-lbl">2. Имя файла или ссылка на скачивание:</span>
+                <div class="op-row"><input id="urlIn" placeholder="dragonvisuals-1.0.0.jar"><button class="btn-s btn-owner" onclick="saveUrl()">Сохранить</button></div>
             </div>
             <div class="op-sec">
                 <span class="op-lbl">3. Проверка сайта от лица других рангов:</span>
@@ -108,13 +108,14 @@
         </div>
     </div>
 
-    <footer>© 2026 DragonVisuals • Minecraft 1.21.4</footer>
+    <footer>© 2026 DragonVisuals • Fabric 1.21.4</footer>
 
     <script>
         const OWNER_LOGIN = "admin", OWNER_PASS = "dragon2026", DEF_KEYS = ["DRAGON-VIP-101","DRAGON-VIP-202","DRAGON-VIP-303"];
+        const MOD_FILE = "dragonvisuals-1.0.0.jar";
         let mode = 'login';
         const getKeys = () => JSON.parse(localStorage.getItem('dv_keys')) || DEF_KEYS;
-        const getUrl = () => localStorage.getItem('dv_url') || "#";
+        const getUrl = () => localStorage.getItem('dv_url') || MOD_FILE;
         const openModal = m => { setTab(m); document.getElementById('authModal').style.display = 'flex'; };
         const closeModal = () => document.getElementById('authModal').style.display = 'none';
         const openOwner = () => document.getElementById('ownerModal').style.display = 'flex';
@@ -159,7 +160,7 @@
 
         function saveUrl() {
             const u = document.getElementById('urlIn').value.trim();
-            if (u) { localStorage.setItem('dv_url', u); alert('Ссылка сохранена!'); render(); }
+            if (u) { localStorage.setItem('dv_url', u); alert('Файл скачивания обновлён!'); render(); }
         }
 
         function testRank(r) {
@@ -179,7 +180,7 @@
             const cls = cur.r === 'Owner' ? 'r-owner' : (cur.r === 'VIP' ? 'r-vip' : 'r-user');
             const adminBtn = (cur.r === 'Owner' || cur.own) ? `<button class="btn-s btn-owner" onclick="openOwner()">👑 Админ-Панель</button>` : '';
             top.innerHTML = `${adminBtn}<div class="user-pill"><span>👤 <b>${cur.u}</b></span><span class="badge ${cls}">${cur.r}</span></div><button class="btn-s" onclick="logout()">Выйти</button>`;
-            area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP') ? `<a href="${getUrl()}" class="btn-main">Скачать DragonVisuals</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
+            area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP') ? `<a href="${getUrl()}" download="${MOD_FILE}" class="btn-main">Скачать DragonVisuals (.jar)</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
             if (cur.r === 'Owner' || cur.own) {
                 document.getElementById('urlIn').value = getUrl();
                 document.getElementById('keyList').innerHTML = getKeys().map(k => `<span class="k-chip" onclick="navigator.clipboard.writeText('${k}');alert('Скопировано: ${k}')">${k}</span>`).join('');
