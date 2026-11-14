@@ -15,11 +15,13 @@
         .top-bar{width:100%;max-width:900px;padding:18px 20px;display:flex;justify-content:flex-end;align-items:center;gap:10px}
         .user-pill{display:flex;align-items:center;gap:8px;background:rgba(20,14,38,0.85);border:1px solid rgba(192,132,252,0.35);padding:7px 15px;border-radius:99px;font-size:0.9rem}
         .badge{padding:3px 9px;border-radius:6px;font-size:0.72rem;font-weight:800;text-transform:uppercase}
-        .r-owner{background:#d97706;color:#fff}.r-vip{background:#9333ea;color:#fff}.r-user{background:rgba(148,163,184,0.25);color:#cbd5e1}
-        .btn-s{background:rgba(168,85,247,0.2);border:1px solid rgba(192,132,252,0.4);color:#f3e8ff;padding:8px 15px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.25s;font-family:inherit}
+        .r-owner{background:#d97706;color:#fff}.r-moder{background:#0284c7;color:#fff}.r-vip{background:#9333ea;color:#fff}.r-user{background:rgba(148,163,184,0.25);color:#cbd5e1}.r-ban{background:#dc2626;color:#fff}
+        .btn-s{background:rgba(168,85,247,0.2);border:1px solid rgba(192,132,252,0.4);color:#f3e8ff;padding:8px 14px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.25s;font-family:inherit;font-size:0.85rem}
         .btn-s:hover{background:rgba(168,85,247,0.45);transform:translateY(-2px)}
         .btn-owner{background:rgba(245,158,11,0.22);border:1px solid rgba(251,191,36,0.6);color:#fde68a}
         .btn-owner:hover{background:rgba(245,158,11,0.45)}
+        .btn-red{background:rgba(220,38,38,0.25);border-color:rgba(248,113,113,0.5);color:#fecaca}
+        .btn-red:hover{background:rgba(220,38,38,0.5)}
         header{text-align:center;padding:25px 20px 15px;animation:fadeUp 0.9s ease forwards}
         .ver{display:inline-block;padding:5px 16px;margin-bottom:12px;border-radius:99px;background:rgba(168,85,247,0.15);border:1px solid rgba(192,132,252,0.4);color:#e9d5ff;font-size:0.85rem;font-weight:600}
         .logo{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,7vw,4.6rem);background:linear-gradient(135deg,#f5d0fe,#c084fc,#7e22ce);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 25px rgba(192,132,252,0.45));animation:float 5s ease-in-out infinite;margin-bottom:8px}
@@ -28,7 +30,6 @@
         .card{background:rgba(20,14,38,0.65);border:1px solid rgba(192,132,252,0.3);border-radius:24px;padding:24px;backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,0.45);transition:0.35s}
         .card:hover{transform:translateY(-5px);border-color:rgba(216,180,254,0.65)}
         .preview{width:100%;height:200px;border-radius:14px;background:linear-gradient(135deg,rgba(46,16,101,0.7),rgba(15,23,42,0.9));display:flex;align-items:center;justify-content:center;color:#a78bfa;margin-bottom:18px;overflow:hidden;border:1px solid rgba(167,139,250,0.2)}
-        .preview img{width:100%;height:100%;object-fit:cover}
         .c-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
         .c-head h2{font-size:1.6rem;font-weight:800}
         .tag{font-size:0.8rem;font-weight:600;padding:5px 12px;border-radius:8px;background:rgba(168,85,247,0.2);border:1px solid rgba(192,132,252,0.35);color:#e9d5ff}
@@ -39,18 +40,21 @@
         .lock p{font-size:0.9rem;color:#cbd5e1;margin-bottom:10px}
         .k-row{display:flex;gap:8px;justify-content:center;margin-top:8px}
         input{background:rgba(9,6,18,0.85);border:1px solid rgba(192,132,252,0.35);color:#fff;padding:10px 14px;border-radius:10px;outline:none;font-family:inherit}
-        .modal-bg{position:fixed;inset:0;background:rgba(5,3,12,0.82);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
-        .modal{background:#140e26;border:1px solid rgba(192,132,252,0.4);border-radius:22px;padding:26px;width:100%;max-width:380px;animation:popIn 0.25s ease}
-        .owner-page{max-width:480px;border-color:rgba(251,191,36,0.55);box-shadow:0 25px 60px rgba(0,0,0,0.8)}
-        .op-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid rgba(251,191,36,0.25)}
-        .op-head h3{color:#fbbf24;font-size:1.25rem}
+        .modal-bg{position:fixed;inset:0;background:rgba(5,3,12,0.84);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
+        .modal{background:#140e26;border:1px solid rgba(192,132,252,0.4);border-radius:22px;padding:24px;width:100%;max-width:380px;animation:popIn 0.25s ease;max-height:90vh;overflow-y:auto}
+        .owner-page{max-width:560px;border-color:rgba(251,191,36,0.55);box-shadow:0 25px 60px rgba(0,0,0,0.85)}
+        .op-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(251,191,36,0.25)}
+        .op-head h3{color:#fbbf24;font-size:1.2rem}
         .op-sec{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08)}
         .op-sec:last-child{border:none;margin-bottom:0;padding-bottom:0}
-        .op-lbl{font-size:0.85rem;color:#cbd5e1;margin-bottom:8px;display:block;font-weight:600}
-        .keys{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-        .k-chip{background:rgba(0,0,0,0.5);border:1px solid rgba(251,191,36,0.45);padding:6px 11px;border-radius:8px;font-family:monospace;color:#fde68a;cursor:pointer;font-size:0.85rem;transition:0.2s}
-        .k-chip:hover{background:rgba(251,191,36,0.2)}
-        .op-row{display:flex;gap:8px}.op-row input{flex:1;padding:9px 12px;font-size:0.88rem}
+        .op-lbl{font-size:0.84rem;color:#cbd5e1;margin-bottom:8px;display:block;font-weight:600}
+        .keys{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+        .k-chip{background:rgba(0,0,0,0.5);border:1px solid rgba(251,191,36,0.45);padding:5px 10px;border-radius:8px;font-family:monospace;color:#fde68a;cursor:pointer;font-size:0.82rem}
+        .op-row{display:flex;gap:8px}.op-row input{flex:1;padding:8px 12px;font-size:0.85rem}
+        .u-list{display:flex;flex-direction:column;gap:8px;max-height:210px;overflow-y:auto}
+        .u-item{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);border:1px solid rgba(192,132,252,0.2);padding:8px 12px;border-radius:10px;font-size:0.85rem;gap:8px;flex-wrap:wrap}
+        .u-acts{display:flex;gap:5px;flex-wrap:wrap}
+        .u-acts button{padding:4px 8px;font-size:0.75rem;border-radius:6px}
         .tabs{display:flex;gap:8px;margin-bottom:14px}
         .tab{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(192,132,252,0.3);background:transparent;color:#cbd5e1;cursor:pointer;font-weight:600}
         .tab.act{background:#7e22ce;color:#fff}
@@ -76,23 +80,19 @@
 
     <div class="modal-bg" id="ownerModal" onclick="if(event.target===this) closeOwner()">
         <div class="modal owner-page">
-            <div class="op-head"><h3>👑 Админ-Панель</h3><button class="btn-s" onclick="closeOwner()">✕ Закрыть</button></div>
+            <div class="op-head"><h3>👑 Админ-Панель и Модерация</h3><button class="btn-s" onclick="closeOwner()">✕ Закрыть</button></div>
             <div class="op-sec">
-                <span class="op-lbl">1. Ключи доступа VIP (нажмите для копирования):</span>
+                <span class="op-lbl">1. Онлайн-список игроков (управление рангами и банами):</span>
+                <div class="u-list" id="userList">Загрузка игроков...</div>
+            </div>
+            <div class="op-sec" id="ownerOnlySec">
+                <span class="op-lbl">2. Ключи доступа VIP (нажмите для копирования):</span>
                 <div class="keys" id="keyList"></div>
                 <div class="op-row"><input id="newKeyIn" placeholder="Новый ключ (напр. DV-999)"><button class="btn-s btn-owner" onclick="addKey()">Создать</button></div>
             </div>
-            <div class="op-sec">
-                <span class="op-lbl">2. Имя файла или ссылка на скачивание:</span>
+            <div class="op-sec" id="ownerUrlSec">
+                <span class="op-lbl">3. Имя файла или ссылка на скачивание:</span>
                 <div class="op-row"><input id="urlIn" placeholder="dragonvisuals-1.0.0.jar"><button class="btn-s btn-owner" onclick="saveUrl()">Сохранить</button></div>
-            </div>
-            <div class="op-sec">
-                <span class="op-lbl">3. Проверка сайта от лица других рангов:</span>
-                <div class="op-row">
-                    <button class="btn-s" style="flex:1" onclick="testRank('Owner')">Owner</button>
-                    <button class="btn-s" style="flex:1" onclick="testRank('VIP')">VIP</button>
-                    <button class="btn-s" style="flex:1" onclick="testRank('User')">User</button>
-                </div>
             </div>
         </div>
     </div>
@@ -101,7 +101,7 @@
         <div class="modal">
             <div class="tabs"><button class="tab act" id="tLog" onclick="setTab('login')">Вход</button><button class="tab" id="tReg" onclick="setTab('reg')">Регистрация</button></div>
             <form onsubmit="auth(event)">
-                <input type="text" id="uIn" placeholder="Никнейм" required>
+                <input type="text" id="uIn" placeholder="Никнейм (3-16 символов)" required>
                 <input type="password" id="pIn" placeholder="Пароль" required>
                 <button type="submit" class="btn-main" style="width:100%">Продолжить</button>
             </form>
@@ -109,33 +109,40 @@
     </div>
 
     <footer>© 2026 DragonVisuals • Fabric 1.21.4</footer>
-
     <script>
-        const OWNER_LOGIN = "admin", OWNER_PASS = "dragon2026", DEF_KEYS = ["DRAGON-VIP-101","DRAGON-VIP-202","DRAGON-VIP-303"];
+        const OWNER = { login: "admin", pass: "dragon2026" };
         const MOD_FILE = "dragonvisuals-1.0.0.jar";
+        const DEF_KEYS = ["DRAGON-VIP-101", "DRAGON-VIP-202", "DRAGON-VIP-303"];
+        const BAD_WORDS = ["admin", "moder", "owner", "хуй", "пизд", "ебл", "бля", "сук"];
         let mode = 'login';
+
         const getKeys = () => JSON.parse(localStorage.getItem('dv_keys')) || DEF_KEYS;
         const getUrl = () => localStorage.getItem('dv_url') || MOD_FILE;
+        const getDb = () => JSON.parse(localStorage.getItem('dv_db') || '{}');
+        const saveDb = db => localStorage.setItem('dv_db', JSON.stringify(db));
+
         const openModal = m => { setTab(m); document.getElementById('authModal').style.display = 'flex'; };
         const closeModal = () => document.getElementById('authModal').style.display = 'none';
-        const openOwner = () => document.getElementById('ownerModal').style.display = 'flex';
+        const openOwner = () => { renderUsers(); document.getElementById('ownerModal').style.display = 'flex'; };
         const closeOwner = () => document.getElementById('ownerModal').style.display = 'none';
         const setTab = m => { mode = m; document.getElementById('tLog').classList.toggle('act', m==='login'); document.getElementById('tReg').classList.toggle('act', m==='reg'); };
 
         function auth(e) {
             e.preventDefault();
             const u = document.getElementById('uIn').value.trim(), p = document.getElementById('pIn').value.trim();
-            if (u.toLowerCase() === OWNER_LOGIN.toLowerCase() && p === OWNER_PASS) {
-                localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'Owner', own: true }));
-                closeModal(); render(); return;
+            if (u.toLowerCase() === OWNER.login.toLowerCase() && p === OWNER.pass) {
+                localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'Owner', staff: true })); closeModal(); render(); return;
             }
-            let db = JSON.parse(localStorage.getItem('dv_db') || '{}');
+            let db = getDb();
             if (mode === 'reg') {
-                if (db[u]) return alert('Ник занят!');
-                db[u] = { p, r: 'User' }; localStorage.setItem('dv_db', JSON.stringify(db));
+                if (u.length < 3 || u.length > 16) return alert('Ник от 3 до 16 символов!');
+                if (BAD_WORDS.some(w => u.toLowerCase().includes(w))) return alert('Этот никнейм запрещён правилами!');
+                if (db[u]) return alert('Этот ник уже зарегистрирован!');
+                db[u] = { p, r: 'User', banned: false }; saveDb(db);
                 localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'User' }));
             } else {
                 if (!db[u] || db[u].p !== p) return alert('Неверный логин или пароль!');
+                if (db[u].banned) return alert('⛔ Ваш аккаунт заблокирован!');
                 localStorage.setItem('dv_cur', JSON.stringify({ u, r: db[u].r }));
             }
             closeModal(); render();
@@ -143,12 +150,25 @@
 
         function useKey() {
             const k = document.getElementById('kIn').value.trim().toUpperCase();
-            if (!getKeys().includes(k)) return alert('Неверный ключ!');
+            if (!getKeys().includes(k)) return alert('Неверный ключ доступа!');
             let cur = JSON.parse(localStorage.getItem('dv_cur')); cur.r = 'VIP';
             localStorage.setItem('dv_cur', JSON.stringify(cur));
-            let db = JSON.parse(localStorage.getItem('dv_db') || '{}');
-            if (db[cur.u]) { db[cur.u].r = 'VIP'; localStorage.setItem('dv_db', JSON.stringify(db)); }
+            let db = getDb(); if (db[cur.u]) { db[cur.u].r = 'VIP'; saveDb(db); }
             alert('Доступ VIP открыт!'); render();
+        }
+
+        function setUserRank(u, r) { let db = getDb(); if (db[u]) { db[u].r = r; saveDb(db); renderUsers(); } }
+        function toggleBan(u) { let db = getDb(); if (db[u]) { db[u].banned = !db[u].banned; saveDb(db); renderUsers(); } }
+        function delUser(u) { if (confirm('Удалить аккаунт ' + u + '?')) { let db = getDb(); delete db[u]; saveDb(db); renderUsers(); } }
+
+        function renderUsers() {
+            const db = getDb(), list = document.getElementById('userList'), names = Object.keys(db), cur = JSON.parse(localStorage.getItem('dv_cur'));
+            if (!names.length) { list.innerHTML = '<div style="color:#8b80a8;font-size:0.85rem">Пока нет зарегистрированных игроков.</div>'; return; }
+            list.innerHTML = names.map(u => {
+                const info = db[u], st = info.banned ? '<span class="badge r-ban">БАН</span>' : `<span class="badge r-${info.r.toLowerCase()}">${info.r}</span>`;
+                const mBtn = cur.r === 'Owner' ? `<button class="btn-s" onclick="setUserRank('${u}','Moder')">Moder</button>` : '';
+                return `<div class="u-item"><div><b>${u}</b> ${st}</div><div class="u-acts"><button class="btn-s" onclick="setUserRank('${u}','VIP')">VIP</button><button class="btn-s" onclick="setUserRank('${u}','User')">User</button>${mBtn}<button class="btn-s btn-red" onclick="toggleBan('${u}')">${info.banned?'Разбан':'Бан'}</button><button class="btn-s btn-red" onclick="delUser('${u}')">✕</button></div></div>`;
+            }).join('');
         }
 
         function addKey() {
@@ -163,11 +183,6 @@
             if (u) { localStorage.setItem('dv_url', u); alert('Файл скачивания обновлён!'); render(); }
         }
 
-        function testRank(r) {
-            let cur = JSON.parse(localStorage.getItem('dv_cur')); cur.r = r;
-            localStorage.setItem('dv_cur', JSON.stringify(cur)); render();
-        }
-
         const logout = () => { localStorage.removeItem('dv_cur'); closeOwner(); render(); };
 
         function render() {
@@ -177,11 +192,18 @@
                 area.innerHTML = `<div class="lock"><p>🔒 Войдите в аккаунт и получите ранг <b>VIP</b> от Владельца для скачивания.</p><button class="btn-s" onclick="openModal('reg')">Регистрация</button></div>`;
                 return;
             }
-            const cls = cur.r === 'Owner' ? 'r-owner' : (cur.r === 'VIP' ? 'r-vip' : 'r-user');
-            const adminBtn = (cur.r === 'Owner' || cur.own) ? `<button class="btn-s btn-owner" onclick="openOwner()">👑 Админ-Панель</button>` : '';
+            const db = getDb();
+            if (!cur.staff && db[cur.u]) {
+                if (db[cur.u].banned) { logout(); return alert('⛔ Ваш аккаунт заблокирован!'); }
+                cur.r = db[cur.u].r; localStorage.setItem('dv_cur', JSON.stringify(cur));
+            }
+            const cls = cur.r === 'Owner' ? 'r-owner' : (cur.r === 'Moder' ? 'r-moder' : (cur.r === 'VIP' ? 'r-vip' : 'r-user'));
+            const adminBtn = (cur.r === 'Owner' || cur.r === 'Moder') ? `<button class="btn-s btn-owner" onclick="openOwner()">👑 Админ-Панель</button>` : '';
             top.innerHTML = `${adminBtn}<div class="user-pill"><span>👤 <b>${cur.u}</b></span><span class="badge ${cls}">${cur.r}</span></div><button class="btn-s" onclick="logout()">Выйти</button>`;
-            area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP') ? `<a href="${getUrl()}" download="${MOD_FILE}" class="btn-main">Скачать DragonVisuals (.jar)</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
-            if (cur.r === 'Owner' || cur.own) {
+            area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP' || cur.r === 'Moder') ? `<a href="${getUrl()}" download="${MOD_FILE}" class="btn-main">Скачать DragonVisuals (.jar)</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
+            document.getElementById('ownerOnlySec').style.display = cur.r === 'Owner' ? 'block' : 'none';
+            document.getElementById('ownerUrlSec').style.display = cur.r === 'Owner' ? 'block' : 'none';
+            if (cur.r === 'Owner') {
                 document.getElementById('urlIn').value = getUrl();
                 document.getElementById('keyList').innerHTML = getKeys().map(k => `<span class="k-chip" onclick="navigator.clipboard.writeText('${k}');alert('Скопировано: ${k}')">${k}</span>`).join('');
             }
