@@ -3,267 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DragonVisuals — ClickGui для Minecraft 1.21.4</title>
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>DragonVisuals — ClickGui 1.21.4</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Плавный переливающийся градиентный фон */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(-45deg, #090612, #1b0c36, #2d114d, #0f172a, #170826);
+            background: linear-gradient(-45deg, #090612, #1b0c36, #2d114d, #0f172a);
             background-size: 400% 400%;
-            animation: gradientFlow 16s ease infinite;
+            animation: grad 14s ease infinite;
             color: #f3f0fa;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
         }
+        @keyframes grad { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        .top-bar { width: 100%; max-width: 900px; padding: 18px 20px; display: flex; justify-content: flex-end; gap: 10px; }
+        .user-pill { display: flex; align-items: center; gap: 8px; background: rgba(20,14,38,0.75); border: 1px solid rgba(192,132,252,0.3); padding: 7px 15px; border-radius: 99px; font-size: 0.9rem; }
+        .badge { padding: 3px 9px; border-radius: 6px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; }
+        .r-owner { background: #d97706; color: #fff; }
+        .r-vip { background: #9333ea; color: #fff; }
+        .r-user { background: rgba(148,163,184,0.25); color: #cbd5e1; }
 
-        /* Мягкое появление элементов */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        .btn-s { background: rgba(168,85,247,0.2); border: 1px solid rgba(192,132,252,0.4); color: #f3e8ff; padding: 8px 16px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.25s; }
+        .btn-s:hover { background: rgba(168,85,247,0.45); transform: translateY(-2px); }
 
-        /* Плавное парение логотипа */
-        @keyframes floatLogo {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
+        header { text-align: center; padding: 25px 20px 15px; animation: fadeUp 0.9s ease forwards; }
+        .ver { display: inline-block; padding: 5px 16px; margin-bottom: 12px; border-radius: 99px; background: rgba(168,85,247,0.15); border: 1px solid rgba(192,132,252,0.4); color: #e9d5ff; font-size: 0.85rem; font-weight: 600; }
+        .logo { font-family: 'Cinzel Decorative', serif; font-size: clamp(2.5rem, 7vw, 4.6rem); background: linear-gradient(135deg, #f5d0fe, #c084fc, #7e22ce); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 25px rgba(192,132,252,0.45)); animation: float 5s ease-in-out infinite; margin-bottom: 8px; }
+        .sub { color: #cbd5e1; font-size: 1.05rem; }
 
-        header {
-            text-align: center;
-            padding: 75px 20px 35px;
-            max-width: 850px;
-            animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
+        .wrap { width: 100%; max-width: 620px; padding: 20px; animation: fadeUp 0.9s ease 0.2s forwards; opacity: 0; }
+        .card { background: rgba(20,14,38,0.65); border: 1px solid rgba(192,132,252,0.3); border-radius: 24px; padding: 24px; backdrop-filter: blur(14px); box-shadow: 0 20px 50px rgba(0,0,0,0.45); transition: 0.35s; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(216,180,254,0.65); }
 
-        .version-badge {
-            display: inline-block;
-            padding: 6px 18px;
-            margin-bottom: 18px;
-            border-radius: 999px;
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(192, 132, 252, 0.4);
-            color: #e9d5ff;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
-        }
+        .preview { width: 100%; height: 200px; border-radius: 14px; background: linear-gradient(135deg, rgba(46,16,101,0.7), rgba(15,23,42,0.9)); display: flex; align-items: center; justify-content: center; color: #a78bfa; margin-bottom: 18px; overflow: hidden; border: 1px solid rgba(167,139,250,0.2); }
+        .preview img { width: 100%; height: 100%; object-fit: cover; }
 
-        .logo {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(2.6rem, 7.5vw, 5.2rem);
-            font-weight: 900;
-            letter-spacing: 3px;
-            background: linear-gradient(135deg, #f5d0fe 0%, #c084fc 45%, #7e22ce 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 28px rgba(192, 132, 252, 0.45));
-            margin-bottom: 14px;
-            animation: floatLogo 5s ease-in-out infinite;
-        }
+        .c-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .c-head h2 { font-size: 1.6rem; font-weight: 800; }
+        .tag { font-size: 0.8rem; font-weight: 600; padding: 5px 12px; border-radius: 8px; background: rgba(168,85,247,0.2); border: 1px solid rgba(192,132,252,0.35); color: #e9d5ff; }
+        .desc { color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
 
-        .subtitle {
-            font-size: 1.15rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .btn-main { display: inline-block; padding: 14px 34px; background: linear-gradient(90deg, #9333ea, #6b21a8); color: #fff; text-decoration: none; font-weight: 800; border-radius: 12px; border: 1px solid rgba(216,180,254,0.45); box-shadow: 0 8px 25px rgba(147,51,234,0.45); cursor: pointer; transition: 0.3s; }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(168,85,247,0.7); }
 
-        /* Главная витрина для ClickGui */
-        .showcase-wrapper {
-            width: 100%;
-            max-width: 820px;
-            padding: 20px;
-            margin-bottom: 70px;
-            opacity: 0;
-            animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
-        }
+        .lock { background: rgba(15,23,42,0.75); border: 1px dashed rgba(192,132,252,0.4); padding: 16px; border-radius: 14px; text-align: center; }
+        .lock p { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px; }
+        .k-row { display: flex; gap: 8px; justify-content: center; margin-top: 8px; }
+        input { background: rgba(9,6,18,0.85); border: 1px solid rgba(192,132,252,0.35); color: #fff; padding: 10px 14px; border-radius: 10px; outline: none; font-family: inherit; }
 
-        .showcase-card {
-            background: rgba(20, 14, 38, 0.6);
-            border: 1px solid rgba(192, 132, 252, 0.28);
-            border-radius: 26px;
-            padding: 32px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.45s ease, box-shadow 0.45s ease;
-        }
+        .owner-box { margin-top: 20px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.4); border-radius: 16px; padding: 16px; display: none; }
+        .owner-box h3 { color: #fbbf24; font-size: 1rem; margin-bottom: 8px; }
+        .keys { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .k-chip { background: rgba(0,0,0,0.45); border: 1px solid rgba(251,191,36,0.4); padding: 5px 10px; border-radius: 8px; font-family: monospace; color: #fde68a; cursor: pointer; font-size: 0.85rem; }
 
-        .showcase-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(216, 180, 254, 0.65);
-            box-shadow: 0 25px 60px rgba(126, 34, 206, 0.35);
-        }
-
-        .preview-box {
-            width: 100%;
-            height: 360px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(46, 16, 101, 0.7), rgba(15, 23, 42, 0.9));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #a78bfa;
-            font-size: 1rem;
-            margin-bottom: 26px;
-            overflow: hidden;
-            border: 1px solid rgba(167, 139, 250, 0.2);
-        }
-
-        .preview-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .showcase-card:hover .preview-box img {
-            transform: scale(1.04);
-        }
-
-        .card-header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-
-        .card-header h2 {
-            font-size: 1.9rem;
-            font-weight: 800;
-            color: #f3e8ff;
-            letter-spacing: 0.5px;
-        }
-
-        .tag {
-            font-size: 0.85rem;
-            font-weight: 600;
-            padding: 6px 14px;
-            border-radius: 10px;
-            background: rgba(168, 85, 247, 0.2);
-            border: 1px solid rgba(192, 132, 252, 0.35);
-            color: #e9d5ff;
-        }
-
-        .description {
-            font-size: 1.05rem;
-            color: #cbd5e1;
-            line-height: 1.7;
-            margin-bottom: 28px;
-        }
-
-        /* Кнопка со световым бликом */
-        .btn-main {
-            position: relative;
-            display: inline-block;
-            padding: 16px 40px;
-            background: linear-gradient(90deg, #9333ea, #6b21a8);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            border-radius: 14px;
-            border: 1px solid rgba(216, 180, 254, 0.45);
-            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.45);
-            overflow: hidden;
-            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
-        }
-
-        .btn-main::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: skewX(-25deg);
-            transition: left 0.65s ease;
-        }
-
-        .btn-main:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 14px 35px rgba(168, 85, 247, 0.7);
-        }
-
-        .btn-main:hover::after {
-            left: 140%;
-        }
-
-        footer {
-            margin-top: auto;
-            padding: 28px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #8b80a8;
-        }
+        .modal-bg { position: fixed; inset: 0; background: rgba(5,3,12,0.8); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 99; padding: 20px; }
+        .modal { background: #140e26; border: 1px solid rgba(192,132,252,0.4); border-radius: 20px; padding: 24px; width: 100%; max-width: 360px; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+        .tab { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid rgba(192,132,252,0.3); background: transparent; color: #cbd5e1; cursor: pointer; font-weight: 600; }
+        .tab.act { background: #7e22ce; color: #fff; }
+        .modal form { display: flex; flex-direction: column; gap: 10px; }
+        footer { margin-top: auto; padding: 20px; font-size: 0.85rem; color: #8b80a8; }
     </style>
 </head>
 <body>
 
+    <div class="top-bar" id="topBar"></div>
+
     <header>
-        <div class="version-badge">✦ Minecraft 1.21.4 ✦</div>
+        <div class="ver">✦ Minecraft 1.21.4 ✦</div>
         <h1 class="logo">DragonVisuals</h1>
-        <p class="subtitle">Стильный и плавный интерфейс нового поколения для вашей игры.</p>
+        <p class="sub">Стильный и плавный интерфейс нового поколения для вашей игры.</p>
     </header>
 
-    <main class="showcase-wrapper">
-        <div class="showcase-card">
-            <div class="preview-box">
-                <!-- Загрузите скриншот clickgui.png в репозиторий и замените текст ниже на: <img src="clickgui.png" alt="ClickGui"> -->
-                Место для скриншота ClickGui (1.21.4)
-            </div>
-
-            <div class="card-header">
+    <main class="wrap">
+        <div class="card">
+            <div class="preview">Место для скриншота ClickGui (1.21.4)</div>
+            <div class="c-head">
                 <h2>ClickGui</h2>
                 <span class="tag">Версия 1.21.4</span>
             </div>
+            <p class="desc">Авторский визуал ClickGui с плавными анимациями открытия, продуманной навигацией по модулям и высокой оптимизацией без потери FPS.</p>
+            
+            <div id="accessArea"></div>
 
-            <p class="description">
-                Авторский визуал ClickGui с плавными анимациями открытия, продуманной навигацией по модулям и высокой оптимизацией без потери FPS.
-            </p>
-
-            <!-- Замените # на ссылку для скачивания или ваш Telegram/Discord -->
-            <a href="#" class="btn-main">Скачать ClickGui</a>
+            <div class="owner-box" id="ownerPanel">
+                <h3>👑 Панель Владельца (Нажмите на ключ, чтобы скопировать)</h3>
+                <div class="keys" id="keyList"></div>
+            </div>
         </div>
     </main>
 
-    <footer>
-        © 2026 DragonVisuals • ClickGui для Minecraft 1.21.4
-    </footer>
+    <div class="modal-bg" id="authModal" onclick="if(event.target===this) closeModal()">
+        <div class="modal">
+            <div class="tabs">
+                <button class="tab act" id="tLog" onclick="setTab('login')">Вход</button>
+                <button class="tab" id="tReg" onclick="setTab('reg')">Регистрация</button>
+            </div>
+            <form onsubmit="auth(event)">
+                <input type="text" id="uIn" placeholder="Никнейм" required>
+                <input type="password" id="pIn" placeholder="Пароль" required>
+                <button type="submit" class="btn-main" style="width:100%">Продолжить</button>
+            </form>
+        </div>
+    </div>
 
+    <footer>© 2026 DragonVisuals • ClickGui 1.21.4</footer>
+
+    <script>
+        const OWNER_LOGIN = "admin";
+        const OWNER_PASS  = "dragon2026";
+        const DOWNLOAD_URL = "#";
+        const KEYS = ["DRAGON-VIP-101", "DRAGON-VIP-202", "DRAGON-VIP-303", "DRAGON-FREE-777"];
+
+        let mode = 'login';
+        const openModal = m => { setTab(m); document.getElementById('authModal').style.display = 'flex'; };
+        const closeModal = () => document.getElementById('authModal').style.display = 'none';
+        const setTab = m => {
+            mode = m;
+            document.getElementById('tLog').classList.toggle('act', m === 'login');
+            document.getElementById('tReg').classList.toggle('act', m === 'reg');
+        };
+
+        function auth(e) {
+            e.preventDefault();
+            const u = document.getElementById('uIn').value.trim();
+            const p = document.getElementById('pIn').value.trim();
+            if (u.toLowerCase() === OWNER_LOGIN.toLowerCase() && p === OWNER_PASS) {
+                localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'Owner' }));
+                closeModal(); render(); return;
+            }
+            let db = JSON.parse(localStorage.getItem('dv_db') || '{}');
+            if (mode === 'reg') {
+                if (db[u]) return alert('Ник занят!');
+                db[u] = { p, r: 'User' };
+                localStorage.setItem('dv_db', JSON.stringify(db));
+                localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'User' }));
+            } else {
+                if (!db[u] || db[u].p !== p) return alert('Неверный логин или пароль!');
+                localStorage.setItem('dv_cur', JSON.stringify({ u, r: db[u].r }));
+            }
+            closeModal(); render();
+        }
+
+        function useKey() {
+            const k = document.getElementById('kIn').value.trim().toUpperCase();
+            if (!KEYS.includes(k)) return alert('Неверный ключ!');
+            let cur = JSON.parse(localStorage.getItem('dv_cur'));
+            cur.r = 'VIP';
+            localStorage.setItem('dv_cur', JSON.stringify(cur));
+            let db = JSON.parse(localStorage.getItem('dv_db') || '{}');
+            if (db[cur.u]) { db[cur.u].r = 'VIP'; localStorage.setItem('dv_db', JSON.stringify(db)); }
+            alert('Доступ VIP открыт!'); render();
+        }
+
+        const logout = () => { localStorage.removeItem('dv_cur'); render(); };
+
+        function render() {
+            const cur = JSON.parse(localStorage.getItem('dv_cur'));
+            const top = document.getElementById('topBar');
+            const area = document.getElementById('accessArea');
+            const own = document.getElementById('ownerPanel');
+
+            if (!cur) {
+                top.innerHTML = `<button class="btn-s" onclick="openModal('login')">Войти / Регистрация</button>`;
+                area.innerHTML = `<div class="lock"><p>🔒 Войдите в аккаунт и получите ранг <b>VIP</b> от Владельца для скачивания.</p><button class="btn-s" onclick="openModal('reg')">Регистрация</button></div>`;
+                own.style.display = 'none';
+                return;
+            }
+
+            const cls = cur.r === 'Owner' ? 'r-owner' : (cur.r === 'VIP' ? 'r-vip' : 'r-user');
+            top.innerHTML = `<div class="user-pill"><span>👤 <b>${cur.u}</b></span><span class="badge ${cls}">${cur.r}</span></div><button class="btn-s" onclick="logout()">Выйти</button>`;
+
+            if (cur.r === 'Owner' || cur.r === 'VIP') {
+                area.innerHTML = `<a href="${DOWNLOAD_URL}" class="btn-main">Скачать DragonVisuals</a>`;
+            } else {
+                area.innerHTML = `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
+            }
+
+            if (cur.r === 'Owner') {
+                own.style.display = 'block';
+                document.getElementById('keyList').innerHTML = KEYS.map(k => `<span class="k-chip" onclick="navigator.clipboard.writeText('${k}');alert('Скопировано: ${k}')">${k}</span>`).join('');
+            } else {
+                own.style.display = 'none';
+            }
+        }
+        render();
+    </script>
 </body>
 </html>
