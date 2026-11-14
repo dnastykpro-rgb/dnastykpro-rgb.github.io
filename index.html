@@ -44,21 +44,15 @@
         .lock{background:rgba(15,23,42,0.75);border:1px dashed rgba(192,132,252,0.4);padding:16px;border-radius:14px;text-align:center}
         .lock p{font-size:0.9rem;color:#cbd5e1;margin-bottom:10px}
         .k-row{display:flex;gap:8px;justify-content:center;margin-top:8px}
-        input,textarea{background:rgba(9,6,18,0.85);border:1px solid rgba(192,132,252,0.35);color:#fff;padding:10px 14px;border-radius:10px;outline:none;font-family:inherit;font-size:0.88rem}
-        input:focus,textarea:focus{border-color:#c084fc}
-        .cfg-form{background:rgba(15,10,30,0.75);border:1px solid rgba(192,132,252,0.35);border-radius:16px;padding:16px;margin-bottom:18px;display:flex;flex-direction:column;gap:10px}
-        .cfg-form h3{font-size:1.05rem;color:#e9d5ff;display:flex;align-items:center;gap:8px}
-        .cfg-file-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-        .cfg-file-lbl{background:rgba(168,85,247,0.22);border:1px dashed rgba(192,132,252,0.55);color:#e9d5ff;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:0.2s}
-        .cfg-file-lbl:hover{background:rgba(168,85,247,0.4)}
+        input{background:rgba(9,6,18,0.85);border:1px solid rgba(192,132,252,0.35);color:#fff;padding:10px 14px;border-radius:10px;outline:none;font-family:inherit;font-size:0.88rem}
+        input:focus{border-color:#c084fc}
         .cfg-list{display:flex;flex-direction:column;gap:12px}
         .cfg-item{background:rgba(12,8,26,0.78);border:1px solid rgba(192,132,252,0.25);border-radius:16px;padding:15px;transition:0.2s}
         .cfg-item:hover{border-color:rgba(192,132,252,0.55)}
         .cfg-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
         .cfg-title{font-weight:800;font-size:1.05rem;color:#fff}
         .cfg-meta{font-size:0.78rem;color:#a78bfa;display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
-        .cfg-desc{font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px}
-        .cfg-btns{display:flex;gap:8px;flex-wrap:wrap}
+        .cfg-desc{font-size:0.86rem;color:#cbd5e1;line-height:1.5}
         .modal-bg{position:fixed;inset:0;background:rgba(5,3,12,0.86);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}
         .modal{background:#140e26;border:1px solid rgba(192,132,252,0.4);border-radius:20px;padding:20px;width:100%;max-width:380px;animation:popIn 0.25s ease}
         .owner-page{max-width:520px;max-height:85vh;overflow-y:auto;border-color:rgba(251,191,36,0.55);box-shadow:0 25px 60px rgba(0,0,0,0.85)}
@@ -114,7 +108,7 @@
                 <h2>⚙️ Конфиги игроков</h2>
                 <button class="btn-s" onclick="switchPage('main')">← Назад к моду</button>
             </div>
-            <p class="desc" style="margin-bottom:14px">Готовые пресеты настроек DragonVisuals от сообщества. Публиковать свои конфиги могут игроки с рангом <b>VIP</b> и выше.</p>
+            <p class="desc" style="margin-bottom:14px">Готовые пресеты настроек DragonVisuals от сообщества. Публиковать свои конфиги из игры и лаунчера могут игроки с рангом <b>VIP</b> и выше.</p>
             <div id="cfgAddArea"></div>
             <div class="cfg-list" id="cfgList"></div>
         </div>
@@ -241,69 +235,6 @@
             render();
         }
 
-        function loadCfgFile(input) {
-            const file = input.files ? input.files.item(0) : null;
-            if (!file) return;
-            if (file.size > 200 * 1024) {
-                alert('Файл слишком большой (максимум 200 КБ)!');
-                input.value = '';
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = e => {
-                document.getElementById('cfgContentIn').value = e.target.result;
-                document.getElementById('cfgFileName').innerText = '📄 ' + file.name;
-                document.getElementById('cfgFileName').dataset.fname = file.name;
-                if (!document.getElementById('cfgNameIn').value.trim()) {
-                    document.getElementById('cfgNameIn').value = file.name.replace(/\.[^/.]+$/, '');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        async function addConfig(e) {
-            e.preventDefault();
-            const cur = JSON.parse(localStorage.getItem('dv_cur'));
-            if (!cur || !['VIP', 'Moder', 'Owner'].includes(cur.r)) {
-                return alert('Добавлять конфиги могут только игроки с рангом VIP и выше!');
-            }
-            const name = document.getElementById('cfgNameIn').value.trim();
-            const desc = document.getElementById('cfgDescIn').value.trim();
-            const content = document.getElementById('cfgContentIn').value.trim();
-            const rawFileName = document.getElementById('cfgFileName')?.dataset?.fname || (name.replace(/[^a-zA-Z0-9а-яА-Я_-]/g, '_') + '.json');
-
-            if (!name || !content) return alert('Укажите название и содержимое конфига!');
-
-            const list = getConfigs();
-            list.unshift({
-                id: Date.now(),
-                name,
-                desc: desc || 'Пользовательский конфиг для DragonVisuals 1.21.4',
-                content,
-                fileName: rawFileName,
-                author: cur.u,
-                rank: cur.r,
-                date: new Date().toLocaleDateString('ru-RU')
-            });
-
-            await saveConfigs(list);
-            renderConfigs();
-            alert('Конфиг успешно опубликован!');
-        }
-        function downloadCfg(id) {
-            const cfg = getConfigs().find(c => c.id === id);
-            if (!cfg) return;
-            const blob = new Blob([cfg.content], { type: 'application/json;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = cfg.fileName || (cfg.name + '.json');
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            URL.revokeObjectURL(url);
-        }
-
         async function deleteCfg(id) {
             if (!confirm('Удалить этот конфиг?')) return;
             const list = getConfigs().filter(c => c.id !== id);
@@ -315,26 +246,18 @@
             const cur = JSON.parse(localStorage.getItem('dv_cur'));
             const addArea = document.getElementById('cfgAddArea');
             const listEl = document.getElementById('cfgList');
-            const canAdd = cur && ['VIP', 'Moder', 'Owner'].includes(cur.r);
+            const isVipPlus = cur && ['VIP', 'Moder', 'Owner'].includes(cur.r);
 
-            if (canAdd) {
+            if (isVipPlus) {
                 addArea.innerHTML = `
-                    <form class="cfg-form" onsubmit="addConfig(event)">
-                        <h3>✨ Опубликовать свой конфиг <span class="badge r-${cur.r.toLowerCase()}">${cur.r}</span></h3>
-                        <input type="text" id="cfgNameIn" placeholder="Название конфига (напр. ReallyWorld PvP)" maxlength="40" required>
-                        <input type="text" id="cfgDescIn" placeholder="Краткое описание (что включено: TargetESP, HUD и т.д.)" maxlength="120">
-                        <div class="cfg-file-row">
-                            <label class="cfg-file-lbl">📁 Загрузить файл (.json / .cfg)<input type="file" accept=".json,.cfg,.txt" style="display:none" onchange="loadCfgFile(this)"></label>
-                            <span id="cfgFileName" style="font-size:0.8rem;color:#a78bfa">или вставьте код ниже</span>
-                        </div>
-                        <textarea id="cfgContentIn" rows="4" placeholder="Вставьте код конфига или выберите файл выше..." required></textarea>
-                        <button type="submit" class="btn-main" style="padding:11px 22px;font-size:0.9rem">Опубликовать конфиг</button>
-                    </form>
+                    <div class="lock" style="margin-bottom:18px;border-style:solid;border-color:rgba(192,132,252,0.5)">
+                        <p style="margin-bottom:0">✨ У вас есть статус <b>${cur.r}</b>! Чтобы опубликовать свои настройки сюда, нажмите <b>«Создать конфиг»</b> прямо в меню мода <b>DragonVisuals</b> или в <b>DragonLauncher</b>.</p>
+                    </div>
                 `;
             } else {
                 addArea.innerHTML = `
                     <div class="lock" style="margin-bottom:18px">
-                        <p>🔒 Добавлять свои конфиги могут только игроки с рангом <b>VIP</b> и выше. Выбрать и установить любой конфиг можно в <b>DragonLauncher</b> или в меню мода!</p>
+                        <p>🔒 Создавать и публиковать конфиги из игры или лаунчера могут только игроки с рангом <b>VIP</b> и выше. Выбрать любой конфиг можно в <b>DragonLauncher</b> или в ClickGui!</p>
                         ${!cur ? `<button class="btn-s" onclick="openModal('login')">Войти в аккаунт</button>` : `<button class="btn-s" onclick="switchPage('main')">Активировать VIP ключ</button>`}
                     </div>
                 `;
@@ -342,7 +265,7 @@
 
             const configs = getConfigs();
             if (!configs.length) {
-                listEl.innerHTML = `<div style="text-align:center;color:#8b80a8;padding:20px;font-size:0.9rem">Пока нет опубликованных конфигов. VIP-игроки могут добавить первый!</div>`;
+                listEl.innerHTML = `<div style="text-align:center;color:#8b80a8;padding:20px;font-size:0.9rem">Пока нет опубликованных конфигов. VIP-игроки могут создать первый прямо в игре или лаунчере!</div>`;
                 return;
             }
 
@@ -366,7 +289,6 @@
                 `;
             }).join('');
         }
-
         function setShot(idx, btn) {
             document.getElementById('shotImg').src = SHOTS[idx];
             document.querySelectorAll('.g-tab').forEach(b => b.classList.remove('act'));
