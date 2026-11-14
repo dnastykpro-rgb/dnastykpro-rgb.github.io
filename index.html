@@ -263,16 +263,20 @@
                 document.getElementById('keyList').innerHTML = getKeys().map(k => `<span class="k-chip" onclick="navigator.clipboard.writeText('${k}');alert('Скопировано: ${k}')">${k}</span>`).join('');
             }
         }
-               fetch('https://' + 'api.counterapi.dev' + '/v1/dragonvisuals_mc1214/visits/up')
+        let savedVisits = parseInt(localStorage.getItem('dv_visits'));
+        if (isNaN(savedVisits)) savedVisits = 0;
+
+        fetch('https://' + 'api.counterapi.dev' + '/v1/dragonvisuals_mc1214/visits/up')
             .then(r => r.json())
             .then(d => {
-                const num = d.count || d.value || (parseInt(localStorage.getItem('dv_visits') || '0') + 1);
+                const apiNum = parseInt(d.count || d.value);
+                const num = !isNaN(apiNum) ? apiNum : (savedVisits + 1);
                 localStorage.setItem('dv_visits', num);
                 const el = document.getElementById('visitCountText');
                 if (el) el.innerText = num;
             })
             .catch(() => {
-                const num = parseInt(localStorage.getItem('dv_visits') || '0') + 1;
+                const num = savedVisits + 1;
                 localStorage.setItem('dv_visits', num);
                 const el = document.getElementById('visitCountText');
                 if (el) el.innerText = num;
