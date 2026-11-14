@@ -12,12 +12,13 @@
         @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
         @keyframes popIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
         @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-        .top-bar{width:100%;max-width:900px;padding:18px 20px;display:flex;justify-content:flex-end;align-items:center;gap:10px}
+        .top-bar{width:100%;max-width:900px;padding:18px 20px;display:flex;justify-content:flex-end;align-items:center;gap:10px;flex-wrap:wrap}
         .user-pill{display:flex;align-items:center;gap:8px;background:rgba(20,14,38,0.85);border:1px solid rgba(192,132,252,0.35);padding:7px 15px;border-radius:99px;font-size:0.9rem}
         .badge{padding:3px 9px;border-radius:6px;font-size:0.72rem;font-weight:800;text-transform:uppercase}
         .r-owner{background:#d97706;color:#fff}.r-moder{background:#0284c7;color:#fff}.r-vip{background:#9333ea;color:#fff}.r-user{background:rgba(148,163,184,0.25);color:#cbd5e1}.r-ban{background:#dc2626;color:#fff}
         .btn-s{background:rgba(168,85,247,0.2);border:1px solid rgba(192,132,252,0.4);color:#f3e8ff;padding:8px 14px;border-radius:10px;font-weight:600;cursor:pointer;transition:0.25s;font-family:inherit;font-size:0.85rem}
         .btn-s:hover{background:rgba(168,85,247,0.45);transform:translateY(-2px)}
+        .btn-s.act-nav{background:#7e22ce;border-color:#d8b4fe;color:#fff;box-shadow:0 0 15px rgba(168,85,247,0.45)}
         .btn-owner{background:rgba(245,158,11,0.22);border:1px solid rgba(251,191,36,0.6);color:#fde68a}
         .btn-owner:hover{background:rgba(245,158,11,0.45)}
         .btn-red{background:rgba(220,38,38,0.25);border-color:rgba(248,113,113,0.5);color:#fecaca}
@@ -34,16 +35,30 @@
         .preview{width:100%;height:260px;border-radius:14px;background:#0f0a1e;display:flex;align-items:center;justify-content:center;color:#a78bfa;margin-bottom:18px;overflow:hidden;border:1px solid rgba(167,139,250,0.25);cursor:zoom-in;position:relative}
         .preview img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease}
         .preview:hover img{transform:scale(1.03)}
-        .c-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+        .c-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap}
         .c-head h2{font-size:1.6rem;font-weight:800}
         .tag{font-size:0.8rem;font-weight:600;padding:5px 12px;border-radius:8px;background:rgba(168,85,247,0.2);border:1px solid rgba(192,132,252,0.35);color:#e9d5ff}
         .desc{color:#cbd5e1;font-size:0.93rem;line-height:1.6;margin-bottom:20px}
-        .btn-main{display:inline-block;padding:14px 34px;background:linear-gradient(90deg,#9333ea,#6b21a8);color:#fff;text-decoration:none;font-weight:800;border-radius:12px;border:1px solid rgba(216,180,254,0.45);box-shadow:0 8px 25px rgba(147,51,234,0.45);cursor:pointer;transition:0.3s}
+        .btn-main{display:inline-block;padding:14px 34px;background:linear-gradient(90deg,#9333ea,#6b21a8);color:#fff;text-decoration:none;font-weight:800;border-radius:12px;border:1px solid rgba(216,180,254,0.45);box-shadow:0 8px 25px rgba(147,51,234,0.45);cursor:pointer;transition:0.3s;font-family:inherit;font-size:0.95rem}
         .btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(168,85,247,0.7)}
         .lock{background:rgba(15,23,42,0.75);border:1px dashed rgba(192,132,252,0.4);padding:16px;border-radius:14px;text-align:center}
         .lock p{font-size:0.9rem;color:#cbd5e1;margin-bottom:10px}
         .k-row{display:flex;gap:8px;justify-content:center;margin-top:8px}
-        input{background:rgba(9,6,18,0.85);border:1px solid rgba(192,132,252,0.35);color:#fff;padding:10px 14px;border-radius:10px;outline:none;font-family:inherit}
+        input,textarea{background:rgba(9,6,18,0.85);border:1px solid rgba(192,132,252,0.35);color:#fff;padding:10px 14px;border-radius:10px;outline:none;font-family:inherit;font-size:0.88rem}
+        input:focus,textarea:focus{border-color:#c084fc}
+        .cfg-form{background:rgba(15,10,30,0.75);border:1px solid rgba(192,132,252,0.35);border-radius:16px;padding:16px;margin-bottom:18px;display:flex;flex-direction:column;gap:10px}
+        .cfg-form h3{font-size:1.05rem;color:#e9d5ff;display:flex;align-items:center;gap:8px}
+        .cfg-file-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+        .cfg-file-lbl{background:rgba(168,85,247,0.22);border:1px dashed rgba(192,132,252,0.55);color:#e9d5ff;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:0.82rem;font-weight:600;transition:0.2s}
+        .cfg-file-lbl:hover{background:rgba(168,85,247,0.4)}
+        .cfg-list{display:flex;flex-direction:column;gap:12px}
+        .cfg-item{background:rgba(12,8,26,0.78);border:1px solid rgba(192,132,252,0.25);border-radius:16px;padding:15px;transition:0.2s}
+        .cfg-item:hover{border-color:rgba(192,132,252,0.55)}
+        .cfg-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+        .cfg-title{font-weight:800;font-size:1.05rem;color:#fff}
+        .cfg-meta{font-size:0.78rem;color:#a78bfa;display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+        .cfg-desc{font-size:0.86rem;color:#cbd5e1;line-height:1.5;margin-bottom:12px}
+        .cfg-btns{display:flex;gap:8px;flex-wrap:wrap}
         .modal-bg{position:fixed;inset:0;background:rgba(5,3,12,0.86);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:99;padding:16px}
         .modal{background:#140e26;border:1px solid rgba(192,132,252,0.4);border-radius:20px;padding:20px;width:100%;max-width:380px;animation:popIn 0.25s ease}
         .owner-page{max-width:520px;max-height:85vh;overflow-y:auto;border-color:rgba(251,191,36,0.55);box-shadow:0 25px 60px rgba(0,0,0,0.85)}
@@ -76,8 +91,9 @@
         <h1 class="logo">DragonVisuals</h1>
         <p class="sub">Стильный и плавный интерфейс нового поколения для вашей игры.</p>
     </header>
+
     <main class="wrap">
-        <div class="card">
+        <div class="card" id="mainCard">
             <div class="gal-tabs">
                 <button class="g-tab act" onclick="setShot(0, this)">Visuals</button>
                 <button class="g-tab" onclick="setShot(1, this)">PvP</button>
@@ -91,6 +107,16 @@
             <div class="c-head"><h2>DragonVisuals</h2><span class="tag">Fabric 1.21.4</span></div>
             <p class="desc">Мод DragonVisuals с плавным ClickGui: TargetESP, JumpCircles, Trails, ChinaHat, 3D Katana, TargetHUD, PurpleGlow и гибкой настройкой тем.</p>
             <div id="accessArea"></div>
+        </div>
+
+        <div class="card" id="configsCard" style="display:none">
+            <div class="c-head">
+                <h2>⚙️ Конфиги игроков</h2>
+                <button class="btn-s" onclick="switchPage('main')">← Назад к моду</button>
+            </div>
+            <p class="desc" style="margin-bottom:14px">Готовые пресеты настроек DragonVisuals от сообщества. Публиковать свои конфиги могут игроки с рангом <b>VIP</b> и выше.</p>
+            <div id="cfgAddArea"></div>
+            <div class="cfg-list" id="cfgList"></div>
         </div>
     </main>
 
@@ -148,14 +174,32 @@
         const SHOTS = ["s_visuals.png", "s_pvp.png", "s_hud.png", "s_chat.png", "s_theme.png"];
         const DEF_KEYS = ["DRAGON-VIP-101", "DRAGON-VIP-202", "DRAGON-VIP-303"];
         const BAD_WORDS = ["admin", "moder", "owner", "хуй", "пизд", "ебл", "бля", "сук"];
-        const BIN_URL = "https://npoint.io";
+        const BIN_URL = "https://api.npoint.io/9ee13fcc49327b18d386";
         let mode = 'login';
+        let activePage = 'main';
 
         const getKeys = () => JSON.parse(localStorage.getItem('dv_keys')) || DEF_KEYS;
         const getUrl = () => localStorage.getItem('dv_url') || MOD_FILE;
         const getDb = () => JSON.parse(localStorage.getItem('dv_db') || '{}');
         const saveDb = db => localStorage.setItem('dv_db', JSON.stringify(db));
         const getDl = () => parseInt(localStorage.getItem('dv_dl') || '0');
+
+        const getConfigs = () => {
+            const db = getDb();
+            if (Array.isArray(db.__configs)) return db.__configs;
+            return JSON.parse(localStorage.getItem('dv_configs') || '[]');
+        };
+
+        async function saveConfigs(list) {
+            localStorage.setItem('dv_configs', JSON.stringify(list));
+            let db = getDb();
+            db.__configs = list;
+            await pushUsers(db);
+        }
+
+        function escHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+        }
 
         async function syncUsers(notify = false) {
             try {
@@ -164,8 +208,12 @@
                     const cloudDb = await r.json();
                     if (cloudDb && typeof cloudDb === 'object') {
                         saveDb(cloudDb);
+                        if (Array.isArray(cloudDb.__configs)) {
+                            localStorage.setItem('dv_configs', JSON.stringify(cloudDb.__configs));
+                        }
                         renderUsers();
-                        if (notify) alert('Список игроков обновлён!');
+                        if (activePage === 'configs') renderConfigs();
+                        if (notify) alert('Данные обновлены!');
                     }
                 }
             } catch (e) {}
@@ -182,6 +230,146 @@
             } catch (e) {}
         }
 
+        function switchPage(page) {
+            activePage = page;
+            document.getElementById('mainCard').style.display = page === 'main' ? 'block' : 'none';
+            document.getElementById('configsCard').style.display = page === 'configs' ? 'block' : 'none';
+            if (page === 'configs') {
+                syncUsers();
+                renderConfigs();
+            }
+            render();
+        }
+
+        function loadCfgFile(input) {
+            const file = input.files ? input.files.item(0) : null;
+            if (!file) return;
+            if (file.size > 200 * 1024) {
+                alert('Файл слишком большой (максимум 200 КБ)!');
+                input.value = '';
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('cfgContentIn').value = e.target.result;
+                document.getElementById('cfgFileName').innerText = '📄 ' + file.name;
+                document.getElementById('cfgFileName').dataset.fname = file.name;
+                if (!document.getElementById('cfgNameIn').value.trim()) {
+                    document.getElementById('cfgNameIn').value = file.name.replace(/\.[^/.]+$/, '');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        async function addConfig(e) {
+            e.preventDefault();
+            const cur = JSON.parse(localStorage.getItem('dv_cur'));
+            if (!cur || !['VIP', 'Moder', 'Owner'].includes(cur.r)) {
+                return alert('Добавлять конфиги могут только игроки с рангом VIP и выше!');
+            }
+            const name = document.getElementById('cfgNameIn').value.trim();
+            const desc = document.getElementById('cfgDescIn').value.trim();
+            const content = document.getElementById('cfgContentIn').value.trim();
+            const rawFileName = document.getElementById('cfgFileName')?.dataset?.fname || (name.replace(/[^a-zA-Z0-9а-яА-Я_-]/g, '_') + '.json');
+
+            if (!name || !content) return alert('Укажите название и содержимое конфига!');
+
+            const list = getConfigs();
+            list.unshift({
+                id: Date.now(),
+                name,
+                desc: desc || 'Пользовательский конфиг для DragonVisuals 1.21.4',
+                content,
+                fileName: rawFileName,
+                author: cur.u,
+                rank: cur.r,
+                date: new Date().toLocaleDateString('ru-RU')
+            });
+
+            await saveConfigs(list);
+            renderConfigs();
+            alert('Конфиг успешно опубликован!');
+        }
+        function downloadCfg(id) {
+            const cfg = getConfigs().find(c => c.id === id);
+            if (!cfg) return;
+            const blob = new Blob([cfg.content], { type: 'application/json;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = cfg.fileName || (cfg.name + '.json');
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        async function deleteCfg(id) {
+            if (!confirm('Удалить этот конфиг?')) return;
+            const list = getConfigs().filter(c => c.id !== id);
+            await saveConfigs(list);
+            renderConfigs();
+        }
+
+        function renderConfigs() {
+            const cur = JSON.parse(localStorage.getItem('dv_cur'));
+            const addArea = document.getElementById('cfgAddArea');
+            const listEl = document.getElementById('cfgList');
+            const canAdd = cur && ['VIP', 'Moder', 'Owner'].includes(cur.r);
+
+            if (canAdd) {
+                addArea.innerHTML = `
+                    <form class="cfg-form" onsubmit="addConfig(event)">
+                        <h3>✨ Опубликовать свой конфиг <span class="badge r-${cur.r.toLowerCase()}">${cur.r}</span></h3>
+                        <input type="text" id="cfgNameIn" placeholder="Название конфига (напр. ReallyWorld PvP)" maxlength="40" required>
+                        <input type="text" id="cfgDescIn" placeholder="Краткое описание (что включено: TargetESP, HUD и т.д.)" maxlength="120">
+                        <div class="cfg-file-row">
+                            <label class="cfg-file-lbl">📁 Загрузить файл (.json / .cfg)<input type="file" accept=".json,.cfg,.txt" style="display:none" onchange="loadCfgFile(this)"></label>
+                            <span id="cfgFileName" style="font-size:0.8rem;color:#a78bfa">или вставьте код ниже</span>
+                        </div>
+                        <textarea id="cfgContentIn" rows="4" placeholder="Вставьте код конфига или выберите файл выше..." required></textarea>
+                        <button type="submit" class="btn-main" style="padding:11px 22px;font-size:0.9rem">Опубликовать конфиг</button>
+                    </form>
+                `;
+            } else {
+                addArea.innerHTML = `
+                    <div class="lock" style="margin-bottom:18px">
+                        <p>🔒 Добавлять свои конфиги могут только игроки с рангом <b>VIP</b> и выше. Скачивание доступно всем!</p>
+                        ${!cur ? `<button class="btn-s" onclick="openModal('login')">Войти в аккаунт</button>` : `<button class="btn-s" onclick="switchPage('main')">Активировать VIP ключ</button>`}
+                    </div>
+                `;
+            }
+
+            const configs = getConfigs();
+            if (!configs.length) {
+                listEl.innerHTML = `<div style="text-align:center;color:#8b80a8;padding:20px;font-size:0.9rem">Пока нет опубликованных конфигов. VIP-игроки могут добавить первый!</div>`;
+                return;
+            }
+
+            const isStaff = cur && (cur.r === 'Owner' || cur.r === 'Moder');
+            listEl.innerHTML = configs.map(c => {
+                const rCls = c.rank === 'Owner' ? 'r-owner' : (c.rank === 'Moder' ? 'r-moder' : 'r-vip');
+                const delBtn = (isStaff || (cur && cur.u === c.author)) ? `<button class="btn-s btn-red" onclick="deleteCfg(${c.id})">🗑 Удалить</button>` : '';
+                return `
+                    <div class="cfg-item">
+                        <div class="cfg-top">
+                            <span class="cfg-title">${escHtml(c.name)}</span>
+                            <span class="tag">${escHtml(c.fileName || 'config.json')}</span>
+                        </div>
+                        <div class="cfg-meta">
+                            <span>Автор: <b>${escHtml(c.author)}</b></span>
+                            <span class="badge ${rCls}">${escHtml(c.rank || 'VIP')}</span>
+                            <span>• ${escHtml(c.date || '')}</span>
+                        </div>
+                        <p class="cfg-desc">${escHtml(c.desc)}</p>
+                        <div class="cfg-btns">
+                            <button class="btn-s" style="background:rgba(147,51,234,0.4);border-color:#c084fc" onclick="downloadCfg(${c.id})">⬇ Скачать конфиг</button>
+                            ${delBtn}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
         function setShot(idx, btn) {
             document.getElementById('shotImg').src = SHOTS[idx];
             document.querySelectorAll('.g-tab').forEach(b => b.classList.remove('act'));
@@ -212,13 +400,13 @@
             e.preventDefault();
             const u = document.getElementById('uIn').value.trim(), p = document.getElementById('pIn').value.trim();
             if (u.toLowerCase() === OWNER.login.toLowerCase() && p === OWNER.pass) {
-                localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'Owner', staff: true })); closeModal(); render(); return;
+                localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'Owner', staff: true })); closeModal(); render(); if (activePage === 'configs') renderConfigs(); return;
             }
             await syncUsers();
             let db = getDb();
             if (mode === 'reg') {
                 if (u.length < 3 || u.length > 16) return alert('Ник от 3 до 16 символов!');
-                if (BAD_WORDS.some(w => u.toLowerCase().includes(w))) return alert('Этот никнейм запрещён правилами!');
+                if (BAD_WORDS.some(w => u.toLowerCase().includes(w)) || u.startsWith('__')) return alert('Этот никнейм запрещён правилами!');
                 if (db[u]) return alert('Этот ник уже зарегистрирован!');
                 db[u] = { p, r: 'User', banned: false }; await pushUsers(db);
                 localStorage.setItem('dv_cur', JSON.stringify({ u, r: 'User' }));
@@ -227,8 +415,9 @@
                 if (db[u].banned) return alert('Ваш аккаунт заблокирован!');
                 localStorage.setItem('dv_cur', JSON.stringify({ u, r: db[u].r }));
             }
-            closeModal(); render();
+            closeModal(); render(); if (activePage === 'configs') renderConfigs();
         }
+
         async function useKey() {
             const k = document.getElementById('kIn').value.trim().toUpperCase();
             if (!getKeys().includes(k)) return alert('Неверный ключ доступа!');
@@ -236,7 +425,7 @@
             let cur = JSON.parse(localStorage.getItem('dv_cur')); cur.r = 'VIP';
             localStorage.setItem('dv_cur', JSON.stringify(cur));
             let db = getDb(); if (db[cur.u]) { db[cur.u].r = 'VIP'; await pushUsers(db); }
-            alert('Доступ VIP открыт!'); render();
+            alert('Доступ VIP открыт!'); render(); if (activePage === 'configs') renderConfigs();
         }
 
         async function setUserRank(u, r) { let db = getDb(); if (db[u]) { db[u].r = r; await pushUsers(db); renderUsers(); } }
@@ -244,7 +433,7 @@
         async function delUser(u) { if (confirm('Удалить аккаунт ' + u + '?')) { let db = getDb(); delete db[u]; await pushUsers(db); renderUsers(); } }
 
         function renderUsers() {
-            const db = getDb(), list = document.getElementById('userList'), names = Object.keys(db), cur = JSON.parse(localStorage.getItem('dv_cur'));
+            const db = getDb(), list = document.getElementById('userList'), names = Object.keys(db).filter(k => !k.startsWith('__')), cur = JSON.parse(localStorage.getItem('dv_cur'));
             if (!list) return;
             if (!names.length) { list.innerHTML = '<div style="color:#8b80a8;font-size:0.82rem">Пока нет зарегистрированных игроков.</div>'; return; }
             list.innerHTML = names.map(u => {
@@ -266,12 +455,14 @@
             if (u) { localStorage.setItem('dv_url', u); alert('Архив скачивания обновлён!'); render(); }
         }
 
-        const logout = () => { localStorage.removeItem('dv_cur'); closeOwner(); render(); };
+        const logout = () => { localStorage.removeItem('dv_cur'); closeOwner(); render(); if (activePage === 'configs') renderConfigs(); };
 
         async function render() {
             const cur = JSON.parse(localStorage.getItem('dv_cur')), top = document.getElementById('topBar'), area = document.getElementById('accessArea');
+            const cfgNavBtn = `<button class="btn-s ${activePage === 'configs' ? 'act-nav' : ''}" onclick="switchPage('${activePage === 'configs' ? 'main' : 'configs'}')">${activePage === 'configs' ? '🏠 Главная' : '⚙️ Конфиги'}</button>`;
+
             if (!cur) {
-                top.innerHTML = `<button class="btn-s" onclick="openModal('login')">Войти / Регистрация</button>`;
+                top.innerHTML = `${cfgNavBtn}<button class="btn-s" onclick="openModal('login')">Войти / Регистрация</button>`;
                 area.innerHTML = `<div class="lock"><p>🔒 Войдите в аккаунт и получите ранг <b>VIP</b> от Владельца для скачивания.</p><button class="btn-s" onclick="openModal('reg')">Регистрация</button></div>`;
                 return;
             }
@@ -283,7 +474,7 @@
             }
             const cls = cur.r === 'Owner' ? 'r-owner' : (cur.r === 'Moder' ? 'r-moder' : (cur.r === 'VIP' ? 'r-vip' : 'r-user'));
             const adminBtn = (cur.r === 'Owner' || cur.r === 'Moder') ? `<button class="btn-s btn-owner" onclick="openOwner()">👑 Админ-Панель</button>` : '';
-            top.innerHTML = `${adminBtn}<div class="user-pill"><span>👤 <b>${cur.u}</b></span><span class="badge ${cls}">${cur.r}</span></div><button class="btn-s" onclick="logout()">Выйти</button>`;
+            top.innerHTML = `${cfgNavBtn}${adminBtn}<div class="user-pill"><span>👤 <b>${cur.u}</b></span><span class="badge ${cls}">${cur.r}</span></div><button class="btn-s" onclick="logout()">Выйти</button>`;
             fetch('http://127.0.0' + encodeURIComponent(cur.u) + '&r=' + encodeURIComponent(cur.r)).catch(()=>{});
             area.innerHTML = (cur.r === 'Owner' || cur.r === 'VIP' || cur.r === 'Moder') ? `<a href="${getUrl()}" download="${MOD_FILE}" onclick="countDownload()" class="btn-main">Скачать DragonVisuals (.zip)</a>` : `<div class="lock"><p>🔒 Ваш ранг: <b>User</b>. Введите ключ доступа от Владельца:</p><div class="k-row"><input id="kIn" placeholder="Ключ..."><button class="btn-s" onclick="useKey()">Активировать</button></div></div>`;
             document.getElementById('ownerStatSec').style.display = cur.r === 'Owner' ? 'block' : 'none';
